@@ -1,6 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
 import { Text, View, ActivityIndicator } from 'react-native';
 import { useFonts } from "expo-font";
+import { Provider } from 'react-redux';
+import store from "./store";
 
 import { styles } from './styles';
 import { COLORS } from "./constants/colors"
@@ -22,10 +23,11 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Text>Open up App.js to start working on your app!</Text>
+      </View>
+    </Provider>
   );
 }
 
