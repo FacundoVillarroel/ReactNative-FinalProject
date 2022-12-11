@@ -1,7 +1,8 @@
-import { Text, View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { useFonts } from "expo-font";
 import { Provider } from 'react-redux';
 import store from "./store";
+import AppNavigator from "./navigation/index"
 
 import { styles } from './styles';
 import { COLORS } from "./constants/colors"
@@ -24,9 +25,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <AppNavigator/>
     </Provider>
   );
 }
