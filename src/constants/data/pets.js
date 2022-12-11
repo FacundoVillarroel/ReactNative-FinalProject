@@ -2,7 +2,7 @@ export const PETS = [
   {
     id:1,
     name:"Firulais",
-    categoryId:1,
+    categoryId:"dog",
     breed:"Border Collie",
     gender:"male",
     hair:"long",
@@ -10,7 +10,7 @@ export const PETS = [
     chip:false,
     collar:false,
     date:1605898400000,
-    description:"",
+    description:"Perdido, sin collar",
     contact:"3512862723",
     lossLocation:"Zone",
     isLost:true,
@@ -19,7 +19,7 @@ export const PETS = [
   {
     id:2,
     name:"Firulais",
-    categoryId:1,
+    categoryId:"dog",
     breed:"Border Collie",
     gender:"male",
     hair:"long",
@@ -36,7 +36,7 @@ export const PETS = [
   {
     id:3,
     name:"Firulais",
-    categoryId:1,
+    categoryId:"dog",
     breed:"toy poodle",
     gender:"male",
     hair:"long",
@@ -53,7 +53,7 @@ export const PETS = [
   {
     id:4,
     name:"Firulais",
-    categoryId:1,
+    categoryId:"dog",
     breed:"Husky",
     gender:"male",
     hair:"long",
@@ -70,7 +70,7 @@ export const PETS = [
   {
     id:5,
     name:"Michi",
-    categoryId:2,
+    categoryId:"cat",
     breed:"British Shorthair",
     gender:"female",
     hair:"short",
