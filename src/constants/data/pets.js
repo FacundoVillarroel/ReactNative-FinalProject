@@ -1,7 +1,8 @@
-const PETS = [
+export const PETS = [
   {
+    id:1,
     name:"Firulais",
-    type:"dog",
+    categoryId:1,
     breed:"Border Collie",
     gender:"male",
     hair:"long",
@@ -11,12 +12,14 @@ const PETS = [
     date:1605898400000,
     description:"",
     contact:"3512862723",
-    lostLocation:"Zone",
-    isLost:true
+    lossLocation:"Zone",
+    isLost:true,
+    image:"https://resizer.glanacion.com/resizer/XOq8M97mfbQXJmkC1FxafW9FzJ4=/768x0/filters:format(webp):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/lanacionar/PQDJEJRXFNFJ5C2V5BSKTRVQEQ.jpg"
   },
   {
+    id:2,
     name:"Firulais",
-    type:"dog",
+    categoryId:1,
     breed:"Border Collie",
     gender:"male",
     hair:"long",
@@ -26,13 +29,15 @@ const PETS = [
     date:1605898400000,
     description:"",
     contact:"3512862723",
-    lostLocation:"Zone",
-    isLost:true
+    lossLocation:"Zone",
+    isLost:true,
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwgItCKdYCW5DeA5ZbRgO2i2PWOKossCORMQ&usqp=CAU"
   },
   {
+    id:3,
     name:"Firulais",
-    type:"dog",
-    breed:"Border Collie",
+    categoryId:1,
+    breed:"toy poodle",
     gender:"male",
     hair:"long",
     eyes:"dark",
@@ -41,13 +46,15 @@ const PETS = [
     date:1605898400000,
     description:"",
     contact:"3512862723",
-    lostLocation:"Zone",
-    isLost:true
+    lossLocation:"Zone",
+    isLost:true,
+    image:"https://www.hogarmania.com/archivos/201705/mascotas-perros-razas-caniche-XxXx80.jpg"
   },
   {
+    id:4,
     name:"Firulais",
-    type:"dog",
-    breed:"Border Collie",
+    categoryId:1,
+    breed:"Husky",
     gender:"male",
     hair:"long",
     eyes:"dark",
@@ -56,7 +63,25 @@ const PETS = [
     date:1605898400000,
     description:"",
     contact:"3512862723",
-    lostLocation:"Zone",
-    isLost:true
+    lossLocation:"Zone",
+    isLost:true,
+    image:"https://www.clinicas-veterpet.com/wp-content/uploads/2022/08/blog_husky.jpg"
+  },
+  {
+    id:5,
+    name:"Michi",
+    categoryId:2,
+    breed:"British Shorthair",
+    gender:"female",
+    hair:"short",
+    eyes:"dark",
+    chip:false,
+    collar:false,
+    date:1605898400000,
+    description:"",
+    contact:"3512862723",
+    lossLocation:"Zone",
+    isLost:true,
+    image:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/British_blue_2009_%28cropped%29.jpg/1200px-British_blue_2009_%28cropped%29.jpg"
   },
 ]

@@ -1,29 +1,25 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
-import { Categories, PetDetail } from "../screens/";
+import { Post } from "../screens";
 import { COLORS } from "../constants/colors";
 
 const Stack = createNativeStackNavigator();
 
-const CategoriesNavigator = () => {
+const PostNavigator = () => {
   return(
     <Stack.Navigator
-    initialRouteName="Categories"
+    initialRouteName="Post"
     screenOptions={{
       headerShown:false
     }}
     >
       <Stack.Screen
-        name="Categories"
-        component={Categories}
-      />
-      <Stack.Screen
-        name="PetDetail"
-        component={PetDetail}
+        name="Post"
+        component={Post}
       />
     </Stack.Navigator>
   )
 }
 
-export default CategoriesNavigator
+export default PostNavigator

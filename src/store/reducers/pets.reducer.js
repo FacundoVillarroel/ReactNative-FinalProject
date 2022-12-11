@@ -12,6 +12,12 @@ const initialState = {
 const petsReducer = (state = initialState, action ) => {
   switch( action.type ){
     case SELECT_PET:
+      petFound = state.pets.find(pet => pet.id === action.id)
+      if (!petFound) return state
+      return {
+        ...state,
+        selected:petFound
+      }
     case FILTER_PET:
     default:
       return state
