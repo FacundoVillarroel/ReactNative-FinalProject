@@ -1,7 +1,7 @@
 import { petsTypes } from "../types";
 import { PETS } from "../../constants/data/pets";
 
-const { FILTER_PET, SELECT_PET } = petsTypes
+const { FILTER_PETS, SELECT_PET } = petsTypes
 
 const initialState = {
   pets:PETS,
@@ -18,7 +18,7 @@ const petsReducer = (state = initialState, action ) => {
         ...state,
         selected:petFound
       }
-    case FILTER_PET:
+    case FILTER_PETS:
     default:
       return state
   }

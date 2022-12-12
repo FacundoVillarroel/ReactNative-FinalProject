@@ -1,22 +1,21 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
-import { Categories, PetDetail } from "../screens/";
-import { COLORS } from "../constants/colors";
+import { PetsList, PetDetail } from "../screens/";
 
 const Stack = createNativeStackNavigator();
 
 const CategoriesNavigator = () => {
   return(
     <Stack.Navigator
-    initialRouteName="Categories"
+    initialRouteName="PetsList"
     screenOptions={{
       headerShown:false
     }}
     >
       <Stack.Screen
-        name="Categories"
-        component={Categories}
+        name="PetsList"
+        component={PetsList}
       />
       <Stack.Screen
         name="PetDetail"

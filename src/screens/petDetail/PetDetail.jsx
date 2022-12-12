@@ -2,18 +2,26 @@ import { View, Text, Image, ScrollView } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { PetDetailItem } from '../../components';
+import { PetDetailItem, ButtonClose } from '../../components';
 import { styles } from './styles';
 import { formatDate } from "../../utils";
 
-const PetDetail = () => {
+const PetDetail = ({navigation}) => {
   const pet = useSelector((state) => state.pets.selected)
 
   const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossLocation, contact, isLost } = pet
 
+  const onClose = () => {
+    return navigation.navigate("PetsList")
+  }
+
   return (
     <ScrollView style={styles.container}>
-      <Image style={styles.image} source={{uri:image}}/>
+      <View style={styles.imageContainer}>
+        <ButtonClose onPress={onClose}/>
+        <Text style={styles.isLost}>{isLost ? "Perdid": "Encontrad"}{gender === "male" ? "o" : "a"}</Text>
+        <Image style={styles.image} source={{uri:image}}/>
+      </View>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.descriptionText}>{description}</Text>
       <View style={styles.detailContainer}>
@@ -28,6 +36,7 @@ const PetDetail = () => {
         <Text style={styles.date}>{formatDate(date)}</Text>
         <Text style={styles.lossLocation}>{lossLocation}</Text>
       </View>
+      <Text style={styles.contact}>Contact: {contact}</Text>
     </ScrollView>
   )
 }

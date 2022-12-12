@@ -7,7 +7,7 @@ import { PetCard } from "../../components";
 import { formatDate } from "../../utils"
 import { selectPet } from '../../store/actions';
 
-const Categories = ({ navigation }) => {
+const PetsList = ({ navigation }) => {
   const pets = useSelector((state) => state.pets.pets);
   const dispatch = useDispatch();
 
@@ -20,7 +20,8 @@ const Categories = ({ navigation }) => {
     <PetCard 
       name={item.name} 
       image={item.image} 
-      /* status={item.isLost ? "perdido" : "encontrado"} */
+      isLost={item.isLost}
+      gender={item.gender} 
       date={formatDate(item.date)}
       lossLocation={item.lossLocation}
       id={item.id}
@@ -40,4 +41,4 @@ const Categories = ({ navigation }) => {
   )
 }
 
-export default Categories
+export default PetsList

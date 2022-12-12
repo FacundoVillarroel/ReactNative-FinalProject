@@ -8,6 +8,18 @@ export const styles = StyleSheet.create({
     backgroundColor:COLORS.dark,
     margin:2,
   },
+  statusContainer:{
+    flex:1,
+    alignItems:"center",
+    backgroundColor:COLORS.danger,
+    opacity:0.6
+  },
+  status:{
+    color:COLORS.white,
+    fontFamily:"MartinMono-Medium",
+    fontSize:13,
+    paddingVertical:4
+  },
   image:{
     width:"100%",
     height:180
@@ -28,10 +40,12 @@ export const styles = StyleSheet.create({
   },
   date:{
     fontFamily:"MartinMono-Light",
-    color:COLORS.white
+    color:COLORS.white,
+    fontSize:11
   },
   lossLocation:{
     fontFamily:"MartinMono-Light",
-    color:COLORS.white
+    color:COLORS.white,
+    fontSize:11
   },
 })

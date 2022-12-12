@@ -7,6 +7,22 @@ export const styles = StyleSheet.create({
     flex:1,
     backgroundColor:COLORS.background,
   },
+  imageContainer:{
+    flex:1
+  },
+  isLost:{
+    position:"absolute",
+    zIndex:100,
+    bottom:10,
+    left:10,
+    backgroundColor:COLORS.dark,
+    borderRadius:10,
+    padding:5,
+    fontFamily:"MartinMono-Regular",
+    color:COLORS.danger,
+    opacity:0.8,
+    
+  },
   image:{
     width:"100%",
     height:250
@@ -44,5 +60,12 @@ export const styles = StyleSheet.create({
     fontFamily:"MartinMono-Light",
     fontSize:14,
     paddingVertical:5
+  },
+  contact:{
+    padding:10,
+    fontFamily:"MartinMono-Regular",
+    fontSize:18,
+    backgroundColor:COLORS.secondary,
+    marginTop:5
   },
 })
