@@ -2,7 +2,7 @@ export const PETS = [
   {
     id:1,
     name:"Firulais",
-    categoryId:"dog",
+    categoryId:"perro",
     breed:"Border Collie",
     gender:"male",
     hair:"long",
@@ -19,7 +19,7 @@ export const PETS = [
   {
     id:2,
     name:"Firulais",
-    categoryId:"dog",
+    categoryId:"perro",
     breed:"Border Collie",
     gender:"male",
     hair:"long",
@@ -36,7 +36,7 @@ export const PETS = [
   {
     id:3,
     name:"Firulais",
-    categoryId:"dog",
+    categoryId:"perro",
     breed:"toy poodle",
     gender:"male",
     hair:"long",
@@ -53,7 +53,7 @@ export const PETS = [
   {
     id:4,
     name:"Firulais",
-    categoryId:"dog",
+    categoryId:"perro",
     breed:"Husky",
     gender:"male",
     hair:"long",
@@ -70,7 +70,7 @@ export const PETS = [
   {
     id:5,
     name:"Michi",
-    categoryId:"cat",
+    categoryId:"gato",
     breed:"British Shorthair",
     gender:"female",
     hair:"short",

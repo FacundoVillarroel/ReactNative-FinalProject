@@ -1,10 +1,10 @@
 export const CATEGORIES = [
   {
-    id:"dog",
-    title:"dogs"
+    id:"perro",
+    title:"perro"
   },
   {
-    id:"cat",
-    title:"cats"
+    id:"gato",
+    title:"gato"
   }
 ]

@@ -3,17 +3,24 @@ import { FlatList, View } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"; 
 
 import { styles } from './styles';
-import { PetCard } from "../../components"; 
+import { PetCard, ButtonFilter } from "../../components"; 
 import { formatDate } from "../../utils"
-import { selectPet } from '../../store/actions';
+import { selectPet, selectCategory } from '../../store/actions';
 
 const PetsList = ({ navigation }) => {
-  const pets = useSelector((state) => state.pets.pets);
   const dispatch = useDispatch();
+  
+  const pets = useSelector((state) => state.pets.pets);
+  const categories = useSelector((state) => state.category.categories)
+  const categorySelected = useSelector((state) => state.category.selected)
 
-  const onSelect = (id) => {
+  const onSelectPet = (id) => {
     dispatch(selectPet(id))
     navigation.navigate("PetDetail")
+  }
+
+  const onSelectCategory= (id) => {
+    dispatch(selectCategory(id))
   }
 
   const renderItem = ( {item} ) => (
@@ -25,11 +32,12 @@ const PetsList = ({ navigation }) => {
       date={formatDate(item.date)}
       lossLocation={item.lossLocation}
       id={item.id}
-      onSelect={onSelect}
+      onSelect={onSelectPet}
     />
   )
   return (
     <View style={styles.container}>
+      <ButtonFilter categories={categories} onSelect={onSelectCategory}/>
       <FlatList
         style={styles.flatList}
         data={pets}
