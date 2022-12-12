@@ -4,8 +4,8 @@ import { COLORS } from "../../constants/colors";
 
 export const styles = StyleSheet.create({
   container:{
-    borderTopWidth:1,
-    borderBottomWidth:1,
+    borderColor:COLORS.secondary,
+    borderTopWidth:2,
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center"

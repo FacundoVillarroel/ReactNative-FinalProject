@@ -5,7 +5,7 @@ import { COLORS } from "../../constants/colors";
 export const styles = StyleSheet.create({
   container:{
     flex:1,
-    backgroundColor:COLORS.primary,
+    backgroundColor:COLORS.dark,
     margin:10,
   },
   image:{
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     alignSelf:"center",
     fontFamily:"MartinMono-Bold",
     fontSize:20,
-    color:COLORS.details,
+    color:COLORS.primary,
   },
   dateContainer:{
     flexDirection:"row",

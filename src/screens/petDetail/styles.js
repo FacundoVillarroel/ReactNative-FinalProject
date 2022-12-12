@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     height:250
   },
   title:{
-    color:COLORS.details,
+    color:COLORS.primary,
     fontFamily:"MartinMono-Bold",
     fontSize:25,
     padding:10
@@ -24,8 +24,8 @@ export const styles = StyleSheet.create({
     paddingBottom:30
   },
   detailContainer:{
-    borderTopWidth:1,
-    borderTopColor:COLORS.light,
+    borderTopWidth:2,
+    borderTopColor:COLORS.secondary,
     marginHorizontal:10
   },
   detailTitle:{
@@ -34,6 +34,8 @@ export const styles = StyleSheet.create({
     fontSize:20
   },
   date:{
+    borderTopWidth:2,
+    borderTopColor:COLORS.secondary,
     fontFamily:"MartinMono-Light",
     fontSize:14,
     paddingTop:20

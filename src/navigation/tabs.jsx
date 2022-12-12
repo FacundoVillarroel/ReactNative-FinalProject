@@ -5,6 +5,7 @@ import HomeNavigator from "./home";
 import PostNavigator from "./post";
 import ProfileNavigator from "./profile";
 import { COLORS } from "../constants/colors";
+import { Ionicons } from "@expo/vector-icons"
 
 const BottomTab = createBottomTabNavigator();
 
@@ -13,28 +14,51 @@ const Tabs = () => {
     <BottomTab.Navigator
       initialRouteName="Home"
       screenOptions={{
+        headerStyle:{
+          backgroundColor:COLORS.primary,
+        },
         headerTitleAlign:"center",
+        headerTintColor:COLORS.white,
+        tabBarActiveTintColor:COLORS.white,
+        tabBarInactiveTintColor:COLORS.white,
+        tabBarStyle:{
+          backgroundColor:COLORS.primary,
+          height:70,
+          paddingBottom:10,
+        },
+        tabBarLabelStyle:{
+          fontFamily:"MartinMono-Medium"
+        },
       }}
     >
       <BottomTab.Screen
         name="Home"
         component={HomeNavigator}
         options={{
-          title:"Home"
+          title:"Home",
+          tabBarIcon:({ focused }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={25} color={COLORS.dark}/>
+          )
         }}
       />
       <BottomTab.Screen
         name="PostNavigator"
         component={PostNavigator}
         options={{
-          title:"Post"
+          title:"Post",
+          tabBarIcon:({ focused }) => (
+            <Ionicons name={focused ? "add-circle" : "add-circle-outline"} size={30} color={COLORS.dark}/>
+          )
         }}
       />
       <BottomTab.Screen
         name="ProfileNavigator"
         component={ProfileNavigator}
         options={{
-          title:"Profile"
+          title:"Profile",
+          tabBarIcon:({ focused }) => (
+            <Ionicons name={focused ? "ios-person" : "ios-person-outline"} size={25} color={COLORS.dark}/>
+          )
         }}
       />
     </BottomTab.Navigator>
