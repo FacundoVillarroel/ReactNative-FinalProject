@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   container:{
     flex:1,
     backgroundColor:COLORS.dark,
-    margin:10,
+    margin:2,
   },
   image:{
     width:"100%",

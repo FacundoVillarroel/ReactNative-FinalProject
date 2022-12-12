@@ -35,7 +35,7 @@ const Tabs = () => {
         name="Home"
         component={HomeNavigator}
         options={{
-          title:"Home",
+          title:"Inicio",
           tabBarIcon:({ focused }) => (
             <Ionicons name={focused ? "home" : "home-outline"} size={25} color={COLORS.dark}/>
           )
@@ -45,7 +45,7 @@ const Tabs = () => {
         name="PostNavigator"
         component={PostNavigator}
         options={{
-          title:"Post",
+          title:"Anunciar",
           tabBarIcon:({ focused }) => (
             <Ionicons name={focused ? "add-circle" : "add-circle-outline"} size={30} color={COLORS.dark}/>
           )
@@ -55,7 +55,7 @@ const Tabs = () => {
         name="ProfileNavigator"
         component={ProfileNavigator}
         options={{
-          title:"Profile",
+          title:"Perfil",
           tabBarIcon:({ focused }) => (
             <Ionicons name={focused ? "ios-person" : "ios-person-outline"} size={25} color={COLORS.dark}/>
           )

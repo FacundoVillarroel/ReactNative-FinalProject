@@ -20,7 +20,7 @@ const Categories = ({ navigation }) => {
     <PetCard 
       name={item.name} 
       image={item.image} 
-      status={item.isLost ? "perdido" : "encontrado"}
+      /* status={item.isLost ? "perdido" : "encontrado"} */
       date={formatDate(item.date)}
       lossLocation={item.lossLocation}
       id={item.id}
@@ -30,9 +30,10 @@ const Categories = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        style={styles.container}
+        style={styles.flatList}
         data={pets}
         renderItem={renderItem}
+        numColumns={2}
         keyExtractor= {item => item.id.toString()}
       />
     </View>
