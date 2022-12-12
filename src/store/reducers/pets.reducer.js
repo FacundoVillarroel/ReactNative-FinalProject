@@ -19,6 +19,10 @@ const petsReducer = (state = initialState, action ) => {
         selected:petFound
       }
     case FILTER_PETS:
+      return{
+        ...state,
+        filteredPets: state.pets.filter(pet => pet.categoryId === action.categoryId)
+      }
     default:
       return state
   }
