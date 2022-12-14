@@ -24,7 +24,7 @@ const petsReducer = (state = initialState, action ) => {
         filteredPets: state.pets.filter(pet => pet.categoryId === action.categoryId)
       }
     default:
-      return state
+      return {...state, filteredPets:[]}
   }
 }
 

@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     flex:1,
     backgroundColor:COLORS.dark,
     margin:2,
+    width:175
   },
   statusContainer:{
     flex:1,

@@ -6,6 +6,7 @@ import { styles } from './styles';
 const ButtonFilter = ({categories, onSelect}) => { /* filter component */
   const [modalVisible, setModalVisible] = useState(false)
   const CATEGORIES = categories.map(category => category.id)
+  CATEGORIES.push("todos")
 
   const onFilter = () => {
     setModalVisible(!modalVisible)

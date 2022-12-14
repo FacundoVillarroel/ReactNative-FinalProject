@@ -10,7 +10,7 @@ const PetCard = ({name, image, isLost, gender, date, lossLocation, id, onSelect}
       <Card>
         <TouchableOpacity style={styles.container} onPress={() => onSelect(id)}>
           <View style={styles.statusContainer}>
-            <Text style={styles.status}>{isLost ? "Perdid": "Encontrad"}{gender === "male" ? "o" : "a"}</Text>
+            <Text style={styles.status}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
           </View>
           <Image style={styles.image} source={{uri:image}} resizeMode="stretch"/>
           <View style={styles.detailsContainer}>

@@ -19,7 +19,7 @@ const PetDetail = ({navigation}) => {
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <ButtonClose onPress={onClose}/>
-        <Text style={styles.isLost}>{isLost ? "Perdid": "Encontrad"}{gender === "male" ? "o" : "a"}</Text>
+        <Text style={styles.isLost}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
         <Image style={styles.image} source={{uri:image}}/>
       </View>
       <Text style={styles.title}>{name}</Text>
