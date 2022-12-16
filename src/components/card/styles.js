@@ -13,6 +13,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 2.22,
 
     elevation: 3,
-    margin:5
+    margin:5,
 }
 })

@@ -1,26 +1,17 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
+import React,{ useState } from "react";
 
 import Tabs from "./tabs";
+import Auth from "./auth";
 
 const AppNavigator = () => {
+  const {userId, setUserId} = useState(null)
+  
   return(
     <NavigationContainer>
-      <Tabs />
+      {userId ? <Tabs /> : <Auth/>}
     </NavigationContainer>
   )
 }
 
 export default AppNavigator
-
-import { StyleSheet } from "react-native";
-import { COLORS } from "../constants/colors";
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
