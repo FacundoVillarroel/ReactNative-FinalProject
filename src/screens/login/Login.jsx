@@ -2,7 +2,7 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native
 import React, { useReducer } from 'react';
 import { isAndroid } from "../../utils";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../store/actions";
+import { signIn } from "../../store/actions";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
 
@@ -36,12 +36,12 @@ const formReducer = (state, action) => {
   }
 }
 
-const Register = ({navigation}) => {
+const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
 
   const onHandleSubmit = () => {
-    dispatch(signUp(formState.email.value, formState.password.value));
+    dispatch(signIn(formState.email.value, formState.password.value));
   };
 
   const onHandleChangeInput = (value, type) => {
@@ -83,13 +83,16 @@ const Register = ({navigation}) => {
                 type="password"
               />
             <TouchableOpacity style={styles.buttonContainer} onPress={onHandleSubmit}>
-              <Text style={styles.buttonText}>Registrarme</Text>
+              <Text style={styles.buttonText}>Iniciar Sesión</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.promptContainer}>
-            <Text style={styles.promptText}> ¿Ya tienes una cuenta?</Text>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("Login")}>
-              <Text style={styles.buttonText}>Ir a Login!</Text>
+            <Text style={styles.promptText}> ¿No tienes una cuenta?</Text>
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("Register")}>
+              <Text style={styles.buttonText}>Ir al Registro!</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.forgotContainer} onPress={null}>
+              <Text style={styles.forgotText}>Recuperar contraseña olvidada</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -97,4 +100,4 @@ const Register = ({navigation}) => {
   )
 }
 
-export default Register
+export default Login

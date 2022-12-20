@@ -5,6 +5,7 @@ import { COLORS } from '../../constants/colors';
 export const styles = StyleSheet.create({
   container:{
     flex:1,
+    minHeight:75
   },
   flexContainer:{
     width:"100%",

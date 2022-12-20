@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextInput, View, Text } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 
@@ -17,8 +17,15 @@ const Input = ({
   error,
   touched,
   iconName = iconName || "",
+  type,
   ...props
 }) => {
+
+  const [hidePassword, setHidePassword] = useState(true)
+  const toggleHidePassword = () => {
+    setHidePassword(!hidePassword)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.flexContainer}>
@@ -32,8 +39,12 @@ const Input = ({
             keyboardType={keyboardType}
             placeholder={placeholder}
             placeholderTextColor= { placeholderTextColor }
+            secureTextEntry={hidePassword}
           />
         </View>
+        {type === "password" ? (
+          <Ionicons style={styles.icon} name={hidePassword ? "eye": "eye-off"} size={25} color={COLORS.primary} onPress={toggleHidePassword}/>
+        ) : null}
       </View>
       {hasError && touched ? (
         <View style={{...styles.messageContainer,...style}}>
