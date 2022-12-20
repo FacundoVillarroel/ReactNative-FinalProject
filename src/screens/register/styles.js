@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     justifyContent:"space-evenly",
   },
   titleContainer:{
-    flex:1,
+    flex:.9,
     alignItems:"center",
     justifyContent:"center",
   },
@@ -27,19 +27,10 @@ export const styles = StyleSheet.create({
     flex:1,
     justifyContent:"center"
   },
-  inputContainer:{
-    width:"100%",
-    flexDirection:"row",
-    alignItems:"center",
-    borderBottomWidth:1,
-    marginVertical:5,
-  },
   icon:{
     paddingLeft:15
   },
   textInput:{
-    color:COLORS.white,
-    paddingVertical:10,
     paddingLeft:20
   },
   buttonContainer:{
@@ -57,7 +48,7 @@ export const styles = StyleSheet.create({
     color:COLORS.white
   },
   promptContainer:{
-    flex:1,
+    flex:.9,
   },
   promptText:{
     alignSelf:"center",

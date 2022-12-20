@@ -1,48 +1,45 @@
 import React from 'react';
-import { View, TextInput, Text } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
 
-import Label from "../label/Label";
+import { COLORS } from '../../constants/colors';
 import { styles } from './styles';
 
 const Input = ({
-  editable,
   children,
   value,
   style,
   onChangeText,
-  onFocus,
-  onBlur,
-  maxLength,
   placeholder,
   placeholderTextColor,
   keyboardType,
   hasError,
   error,
   touched,
+  iconName = iconName || "",
   ...props
 }) => {
   return (
     <View style={styles.container}>
-      <Label {...props}>
-        <TextInput
-          {...props}
-          style={{ ...styles.input, ...style }}
-          editable={editable}
-          value={value}
-          onChangeText={onChangeText}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          maxLength={maxLength}
-          placeholder={placeholder}
-          placeholderTextColor={placeholderTextColor}
-          keyboardType={keyboardType}
-        />
-      </Label>
-      {hasError && touched ? (
-        <View style={styles.message}>
-          <Text style={styles.helperText}>{error}</Text>
+      <View style={styles.flexContainer}>
+        <Ionicons style={styles.icon} name={iconName} size={25} color={COLORS.primary}/>
+        <View style= {styles.inputContainer}>
+          <TextInput 
+            {...props}
+            style={{...styles.textInput, ...style}} 
+            value={value}
+            onChangeText = { onChangeText }
+            keyboardType={keyboardType}
+            placeholder={placeholder}
+            placeholderTextColor= { placeholderTextColor }
+          />
         </View>
-      ) : null}
+      </View>
+      {hasError && touched ? (
+        <View style={{...styles.messageContainer,...style}}>
+          <Text style= {styles.message}>{error}</Text>
+        </View>
+      ): null}
     </View>
   );
 };

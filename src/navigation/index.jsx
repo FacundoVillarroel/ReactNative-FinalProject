@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React,{ useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 import Tabs from "./tabs";

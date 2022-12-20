@@ -1,24 +1,56 @@
-import { View, Text, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import React, { useReducer } from 'react';
 import { isAndroid } from "../../utils";
-import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/actions";
+import { UPDATED_FORM } from '../../utils/form';
+import { onInputChange } from '../../utils/form';
 
+import { Input } from '../../components';
 import { styles } from "./styles";
 import { COLORS } from '../../constants/colors';
 
+const initialState = {
+  email:{value: "", error: "", touched:false, hasError:true },
+  password:{value: "", error: "", touched:false, hasError:true },
+  isFormatValid:false,
+}
+
+const formReducer = (state, action) => {
+  switch(action.type) {
+    case UPDATED_FORM: 
+    const { name, value, hasError, error, touched, isFormValid } = action.data;
+    return {
+      ...state,
+      [name]:{
+        ...state[name],
+        value,
+        hasError,
+        error,
+        touched,
+      },
+      isFormValid,
+    };
+    default:
+      return state;
+  }
+}
+
 const Register = () => {
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formState, dispatchFormState] = useReducer(formReducer, initialState);
 
   const onHandleSubmit = () => {
-    dispatch(signUp(email,password))
-    setEmail("")
-    setPassword("")
-  }
+    dispatch(
+      isLogin
+        ? signIn(formState.email.value, formState.password.value)
+        : signUp(formState.email.value, formState.password.value)
+    );
+  };
+
+  const onHandleChangeInput = (value, type) => {
+    onInputChange(type, value, dispatchFormState, formState);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -30,25 +62,30 @@ const Register = () => {
             <Text style={styles.title}>Titulo De La App</Text>
           </View>
           <View style={styles.inputsContainer}>
-            <View style={styles.inputContainer}>
-              <Ionicons style={styles.icon} name="ios-person" size={25} color={COLORS.primary}/>
-              <TextInput 
+              <Input 
                 style={styles.textInput} 
-                onChangeText = { (text) => setEmail(text) }
+                iconName={"ios-person"}
+                onChangeText = { (text) => onHandleChangeInput(text,"email") }
                 placeholder="Ingrese su Email"
                 placeholderTextColor={COLORS.light}
+                keyboardType="email-address"
+                value={formState.email.value}
+                hasError={formState.email.hasError}
+                error={formState.email.error}
+                touched={formState.email.touched}
               />
-            </View>
-            <View style={styles.inputContainer}>
-              <Ionicons style={styles.icon} name="lock-closed" size={25} color={COLORS.primary}/>
-              <TextInput 
+              <Input 
                 style={styles.textInput} 
+                iconName= "lock-closed"
                 secureTextEntry
-                onChangeText = { (text) => setPassword(text) }
+                onChangeText = { (text) => onHandleChangeInput(text, "password") }
                 placeholder="Ingrese su Contraseña"
                 placeholderTextColor={COLORS.light}
+                value={formState.password.value}
+                hasError={formState.password.hasError}
+                error={formState.password.error}
+                touched={formState.password.touched}
               />
-            </View>
             <TouchableOpacity style={styles.buttonContainer} onPress={onHandleSubmit}>
               <Text style={styles.buttonText}>Registrarme</Text>
             </TouchableOpacity>
