@@ -12,11 +12,9 @@ export const styles = StyleSheet.create({
     flexDirection:"row",
     alignItems:"center",
     borderBottomWidth:1,
-    marginVertical:5,
   },
   inputContainer:{
     color:COLORS.white,
-    paddingVertical:10,
     flex:1,
   },
   textInput:{

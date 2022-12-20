@@ -21,7 +21,7 @@ const Input = ({
   ...props
 }) => {
 
-  const [hidePassword, setHidePassword] = useState(true)
+  const [hidePassword, setHidePassword] = useState(type === "password" ? true : false)
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword)
   }

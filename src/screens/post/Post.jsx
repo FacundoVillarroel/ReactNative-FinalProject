@@ -4,13 +4,11 @@ import React from 'react';
 import { styles } from './styles';
 
 const Post = ({navigation}) => {
-  const onHandleClose = () => {
-    navigation.navigate("Home")
-  }
+  
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <TouchableOpacity style={styles.closeBtnContainer} onPress={onHandleClose}>
+        <TouchableOpacity style={styles.closeBtnContainer} onPress={() => navigation.navigate("Home")}>
           <Text style={styles.closeBtnText}>X</Text>
         </TouchableOpacity>
         <View style={styles.optionsContainer}>
