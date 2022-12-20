@@ -14,6 +14,10 @@ const Tabs = () => {
     <BottomTab.Navigator
       initialRouteName="Home"
       screenOptions={{
+        headerTitleStyle:{
+          fontFamily:"MartinMono-Bold",
+          fontSize:20
+        },
         headerStyle:{
           backgroundColor:COLORS.primary,
         },

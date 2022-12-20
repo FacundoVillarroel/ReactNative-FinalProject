@@ -1,10 +1,56 @@
 import { StyleSheet } from "react-native";
-
 import { COLORS } from "../../constants/colors";
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create ({
   container:{
     flex:1,
-    backgroundColor:COLORS.background
-  }
+    justifyContent:"center",
+    alignItems:"center",
+    backgroundColor:COLORS.dark
+  },
+  contentContainer:{ 
+    backgroundColor:"white",
+    width:"85%",
+    padding:12,
+    borderRadius:10,
+  },
+  closeBtnContainer:{
+    position:"absolute",
+    top:10,
+    right:15,
+  },
+  closeBtnText:{
+    fontFamily:"MartinMono-Bold"
+  },
+  title:{
+    fontFamily:"MartinMono-Bold",
+    fontSize:18,
+    paddingBottom:5
+  },
+  description:{
+    fontFamily:"MartinMono-Regular",
+    fontSize:12
+  },
+  optionsContainer:{
+    width:"100%",
+    marginVertical:5
+  },
+  optionTouchable:{
+    borderRadius:5,
+    backgroundColor:COLORS.primary,
+    marginVertical:10,
+    padding:5,
+    height:90
+  },
+  optionTittle:{
+    fontSize:16,
+    fontFamily:"MartinMono-Bold",
+    color:COLORS.white,
+    paddingVertical:5,
+  },
+  optionDescription:{
+    fontFamily:"MartinMono-Regular",
+    color:COLORS.white,
+    fontSize:12,
+  },
 })
