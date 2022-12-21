@@ -1,11 +1,22 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import React from 'react';
+import {Picker} from '@react-native-picker/picker';
+import React, { useState } from 'react';
 import { Input } from '../../components';
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
+import { COLORS } from '../../constants/colors';
 import { styles } from "./styles";
 
 const NewLostPet = ({ navigation }) => {
+  const [type, setType] = useState("");
+  const [collar, setCollar] = useState(false);
+  const [chip, setChip] = useState(false);
+  const [gender, setGender] = useState("")
+
+  const handleCheckBox = ( name ) => {
+    name === "collar" ? setCollar(!collar) : setChip(!chip)
+  }
+
   return (
     <View style={styles.container}>
 
@@ -38,7 +49,15 @@ const NewLostPet = ({ navigation }) => {
         {/* Tipo de animal */}
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Tipo de animal</Text>
-          <Input style={styles.input} placeholder="Escoge un tipo de animal"/>
+          <Picker
+            selectedValue={type}
+            onValueChange={(itemValue, itemIndex) =>
+              setType(itemValue)
+            }>
+            <Picker.Item label="Seleccione el tipo de mascota" value="" />
+            <Picker.Item label="Perro" value="perro" />
+            <Picker.Item label="Gato" value="gato" />
+          </Picker>
         </View>
 
         {/* Raza */}
@@ -51,9 +70,9 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Sexo</Text>
           <View style={styles.genderContainer}>
-            <TouchableOpacity style={styles.touchableGender}><Text>Macho</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.touchableGender}><Text>Hembra</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.touchableGender}><Text>No lo sé</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableGender} onPress={() => setGender("male")}><Ionicons name="male" size={24} color={gender === "male" ? COLORS.primary : "black"} /><Text>Macho</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableGender} onPress={() => setGender("female")}><Ionicons name="female" size={24} color={gender === "female" ? COLORS.primary :"black"} /><Text>Hembra</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableGender} onPress={() => setGender("")}><Ionicons name="male-female-sharp" size={24} color={!gender ? COLORS.primary : "black"} /><Text>No lo sé</Text></TouchableOpacity>
           </View>
         </View>
 
@@ -61,8 +80,8 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Apariencia</Text>
           <View style={styles.appearanceContainer}>
-            <TouchableOpacity style={styles.touchableAppearance}><Text>Pelo</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.touchableAppearance}><Text>Ojos</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableAppearance}><MaterialIcons name="grass" size={24} color="black" /><Text>Pelo</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableAppearance}><Ionicons name="eye-outline" size={24} color="black" /><Text>Ojos</Text></TouchableOpacity>
           </View>
         </View>
 
@@ -70,11 +89,11 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Identificación</Text>
           <View style={styles.idContainer}>
-            <TouchableOpacity style={styles.checkBox}><MaterialIcons name="check-box-outline-blank" style={styles.checkIcon}/></TouchableOpacity>
+            <TouchableOpacity style={styles.checkBox} onPress={() => handleCheckBox("collar")}><MaterialIcons name={collar ? "check-box" : "check-box-outline-blank"} color={COLORS.primary} style={styles.checkIcon}/></TouchableOpacity>
             <Text style={styles.idText}> Collar identificador</Text>
           </View>
           <View style={styles.idContainer}>
-            <TouchableOpacity style={styles.checkBox}><MaterialIcons name="check-box-outline-blank" style={styles.checkIcon}/></TouchableOpacity>
+            <TouchableOpacity style={styles.checkBox} onPress={() => handleCheckBox("chip")}><MaterialIcons name={chip ? "check-box" : "check-box-outline-blank"} color={COLORS.primary} style={styles.checkIcon}/></TouchableOpacity>
             <Text style={styles.idText}> Chip Identificador </Text>
           </View>
         </View>
