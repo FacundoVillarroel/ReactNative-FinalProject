@@ -37,7 +37,6 @@ export const styles = StyleSheet.create({
   },
   input:{
     color:COLORS.dark,
-
   },
   genderContainer:{
     paddingHorizontal:1,
@@ -65,7 +64,25 @@ export const styles = StyleSheet.create({
     borderRadius:5,
     alignItems:"center",
     justifyContent:"center",
-
+  },
+  appearanceOptions:{
+    alignItems:"center",
+    marginVertical:10,
+  },
+  appearanceOption:{
+    width:"70%",
+    borderWidth:1,
+    alignItems:"center",
+    justifyContent:"center",
+    borderRadius:10,
+    marginBottom:10,
+    backgroundColor:COLORS.light
+  },
+  appearanceText:{
+    paddingVertical:3,
+    color:COLORS.white,
+    fontFamily:"MartinMono-Regular",
+    fontSize:13,
   },
   idContainer:{
     height:50,
@@ -82,6 +99,9 @@ export const styles = StyleSheet.create({
   idText:{
     fontFamily:"MartinMono-Light",
     fontSize:12,
+  },
+  btnCalendar:{
+    margin:0,
   },
   lossZone:{
     height:100,

@@ -47,7 +47,7 @@ const Input = ({
         ) : null}
       </View>
       {hasError && touched ? (
-        <View style={{...styles.messageContainer,...style}}>
+        <View style={{...style}}>
           <Text style= {styles.message}>{error}</Text>
         </View>
       ): null}

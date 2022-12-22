@@ -22,8 +22,6 @@ export const styles = StyleSheet.create({
     fontFamily:"MartinMono-Bold",
     color:COLORS.white
   },
-  messageContainer:{
-  },
   message:{
     color:COLORS.danger,
     fontWeight:"600"

@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     alignSelf:"center",
     fontFamily:"MartinMono-Bold",
     fontSize:20,
-    color:COLORS.primary,
+    color:COLORS.white,
   },
   dateContainer:{
     flexDirection:"row",
@@ -41,12 +41,12 @@ export const styles = StyleSheet.create({
   },
   date:{
     fontFamily:"MartinMono-Light",
-    color:COLORS.white,
+    color:COLORS.primary,
     fontSize:11
   },
   lossLocation:{
     fontFamily:"MartinMono-Light",
-    color:COLORS.white,
+    color:COLORS.primary,
     fontSize:11
   },
 })
