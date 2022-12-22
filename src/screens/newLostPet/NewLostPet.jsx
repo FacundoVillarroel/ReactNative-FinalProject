@@ -1,9 +1,8 @@
-import { View, Text, ScrollView, TouchableOpacity, Button, Keyboard } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { View, Text, ScrollView, TouchableOpacity, Keyboard, Alert } from 'react-native';
 import React, { useReducer, useState } from 'react';
-import { Input } from '../../components';
+import { Input, DateSelector, PhotoSelector, Select } from '../../components';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import DatePicker from 'react-native-modern-datepicker';
+import { CATEGORIES } from "../../constants/data/categories"
 
 import { COLORS } from '../../constants/colors';
 import { styles } from "./styles";
@@ -11,19 +10,20 @@ import { onInputChange, UPDATED_FORM } from '../../utils/form';
 import { useDispatch } from 'react-redux';
 
 const initialState = {
-  image:{value: "", error: "", touched:false, hasError:true },
+  image:{value: "", error: "", touched:false, hasError:false },
   name:{value: "", error: "", touched:false, hasError:true },
   categoryId:{value: "", error: "", touched:false, hasError:true },
   breed:{value: "", error: "", touched:false, hasError:true },
   gender:{value: "", error: "", touched:false, hasError:false },
   hair:{value: "", error: "", touched:false, hasError:true },
   eyes:{value: "", error: "", touched:false, hasError:true },
-  chip:{value: false, error: "", touched:false, hasError:true },
-  collar:{value: false, error: "", touched:false, hasError:true },
+  chip:{value: false, error: "", touched:false, hasError:false },
+  collar:{value: false, error: "", touched:false, hasError:false },
   date:{value: "", error: "", touched:false, hasError:true },
-  lossZone:{value: "", error: "", touched:false, hasError:true },
+  lossZone:{value: "", error: "", touched:false, hasError:false },
   description:{value: "", error: "", touched:false, hasError:false },
   contact:{value: "", error: "", touched:false, hasError:true },
+  isFormValid: false,
 }
 
 const formReducer = (state, action) => {
@@ -41,8 +41,8 @@ const formReducer = (state, action) => {
         },
         isFormValid,
       }
-      default:
-        return state;
+    default: 
+      return state;
     }
 }
 
@@ -56,6 +56,14 @@ const NewLostPet = ({ navigation }) => {
   const onHandleChangeInput = (value, name) => {
     onInputChange(name, value, dispatchFormState, formState)
   };
+
+  const onHandleSubmit = () => {
+    if (!formState.isFormValid) {
+      Alert.alert("Formulario inválido", "Faltan campos por completar o hay campos erroneos", [{text:"ok"}])
+    } else {
+      console.log("MASCOTA:",formState);
+    }
+  }
 
   const handleCheckBox = ( name ) => {
     name === "collar" ? onHandleChangeInput(!formState.collar.value, "collar") : onHandleChangeInput(!formState.chip.value, "chip")
@@ -86,15 +94,9 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Añade Fotos</Text>
           <View style={styles.photosContainer}>
-            <TouchableOpacity style={styles.photoContainer}>
-              <Text style={styles.addPhoto}> + </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.photoContainer}>
-              <Text style={styles.addPhoto}> + </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.photoContainer}>
-              <Text style={styles.addPhoto}> + </Text>
-            </TouchableOpacity>
+            <PhotoSelector text={"+"} onPress={null}/>
+            <PhotoSelector text={"+"} onPress={null}/>
+            <PhotoSelector text={"+"} onPress={null}/>
           </View>
           <Text style={styles.photoDescription}>Las fotos deben describir el animal para ayudar a identificarlo</Text>
         </View>
@@ -116,15 +118,14 @@ const NewLostPet = ({ navigation }) => {
         {/* Tipo de animal */}
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Tipo de animal</Text>
-          <Picker
-            selectedValue={formState.categoryId.value}
-            onValueChange={(itemValue, itemIndex) =>
-              onHandleChangeInput(itemValue, "categoryId")
-            }>
-            <Picker.Item label="Seleccione el tipo de mascota" value="" />
-            <Picker.Item label="Perro" value="perro" />
-            <Picker.Item label="Gato" value="gato" />
-          </Picker>
+          <Select 
+            value={formState.categoryId.value} 
+            placeHolder="Seleccione el tipo de mascota" 
+            options={CATEGORIES} 
+            onChange={onHandleChangeInput} 
+            onChangeName="categoryId"
+          />
+          {formState.categoryId.hasError ? <Text style={styles.errorText}>{formState.categoryId.error}</Text>: null}
         </View>
 
         {/* Raza */}
@@ -164,6 +165,7 @@ const NewLostPet = ({ navigation }) => {
                 color={formState.hair.value ? COLORS.primary : "black"} 
               />
               <Text>{formState.hair.value ? formState.hair.value : "Pelo"}</Text>
+              {formState.hair.hasError ? <Text style={styles.errorText}>{formState.hair.error}</Text>: null}
             </TouchableOpacity>
             <TouchableOpacity 
               style={styles.touchableAppearance} 
@@ -174,6 +176,7 @@ const NewLostPet = ({ navigation }) => {
                 color={formState.eyes.value ? COLORS.primary : "black"} 
               />
               <Text>{formState.eyes.value ? formState.eyes.value : "Ojos"}</Text>
+              {formState.eyes.hasError ? <Text style={styles.errorText}>{formState.eyes.error}</Text>: null}
             </TouchableOpacity>
           </View>
           {appearanceToSelect === "eyes" ? 
@@ -214,10 +217,7 @@ const NewLostPet = ({ navigation }) => {
             error={formState.date.error}
             touched={formState.date.touched}
           />
-          {calendarVisible? <DatePicker
-            maximumDate={(new Date()).toISOString().split('T')[0]}
-            onSelectedChange={(date) => onSelectDate(date)}
-          /> : null}
+          {calendarVisible? <DateSelector onSelectDate={onSelectDate}/>: null}
         </View>
 
         {/* Zona */}
@@ -255,7 +255,7 @@ const NewLostPet = ({ navigation }) => {
         </View>
 
       </ScrollView>
-      <TouchableOpacity style={styles.publishBtnContainer}>
+      <TouchableOpacity style={styles.publishBtnContainer} onPress={onHandleSubmit}>
         <Text style={styles.publishText}>Publicar</Text>
       </TouchableOpacity>
     </View>

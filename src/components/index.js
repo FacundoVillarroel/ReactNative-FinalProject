@@ -4,3 +4,6 @@ export { default as Card } from "./card/Card";
 export { default as ButtonClose } from "./buttonClose/ButtonClose";
 export { default as ButtonFilter } from "./buttonFilter/ButtonFilter";
 export { default as Input } from "./input/Input";
+export { default as DateSelector } from "./dateSelector/DateSelector";
+export { default as PhotoSelector } from "./photoSelector/PhotoSelector";
+export { default as Select } from "./select/Select";

@@ -47,6 +47,13 @@ export const validateInput = (name, value) => {
       }
       break;
 
+    case 'categoryId':
+      if (value.trim() === '') {
+        hasError = true;
+        error = 'Debes seleccionar un tipo de animal.'
+      }
+      break;
+
     case 'breed':
       if (value.trim() === '') {
         hasError = true;

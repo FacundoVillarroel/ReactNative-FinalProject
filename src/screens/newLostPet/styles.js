@@ -17,18 +17,6 @@ export const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:"space-between",
   },
-  photoContainer:{
-    width:100,
-    height:100,
-    alignItems:"center",
-    justifyContent:"center",
-    backgroundColor:"gray",
-    borderRadius:5
-  },
-  addPhoto:{
-    fontFamily:"MartinMono-Light",
-    fontSize:25,
-  },
   photoDescription:{
     paddingTop:5,
     paddingBottom:15,
@@ -124,5 +112,9 @@ export const styles = StyleSheet.create({
   },
   bottom:{
     paddingBottom:50
+  },
+  errorText:{
+    color:COLORS.danger,
+    fontWeight:"600"
   },
 })
