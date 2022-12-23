@@ -9,6 +9,10 @@ export const styles = StyleSheet.create({
     backgroundColor:"gray",
     borderRadius:5,
   },
+  image:{
+    width:100,
+    height:100,
+  },
   text:{
     fontFamily:"MartinMono-Light",
     fontSize:25,

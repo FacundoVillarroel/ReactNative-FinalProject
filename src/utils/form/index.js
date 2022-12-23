@@ -105,6 +105,11 @@ export const onInputChange = (name, value, dispatch, formState) => {
       break;
     }
   }
+  if (name === "image") {
+    currentValue = {...formState[name]}.value
+    currentValue.push(value)
+    value = currentValue
+  }
 
   dispatch({
     type: UPDATED_FORM,

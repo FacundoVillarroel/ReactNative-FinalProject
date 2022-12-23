@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity, Keyboard, Alert } from 'react-native';
 import React, { useReducer, useState } from 'react';
-import { Input, DateSelector, PhotoSelector, Select } from '../../components';
+import { Input, DateSelector, ImageSelector, Select } from '../../components';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { CATEGORIES } from "../../constants/data/categories"
 
@@ -10,7 +10,7 @@ import { onInputChange, UPDATED_FORM } from '../../utils/form';
 import { useDispatch } from 'react-redux';
 
 const initialState = {
-  image:{value: "", error: "", touched:false, hasError:false },
+  image:{value: [], error: "", touched:false, hasError:true },
   name:{value: "", error: "", touched:false, hasError:true },
   categoryId:{value: "", error: "", touched:false, hasError:true },
   breed:{value: "", error: "", touched:false, hasError:true },
@@ -47,7 +47,6 @@ const formReducer = (state, action) => {
 }
 
 const NewLostPet = ({ navigation }) => {
-  const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer( formReducer, initialState)
 
   const [calendarVisible, setCalendarVisible] = useState(false);
@@ -84,6 +83,10 @@ const NewLostPet = ({ navigation }) => {
     setAppearanceToSelect("")
   }
 
+  const onImagePicked = (uri) => {
+    onHandleChangeInput( uri, "image")
+  }
+
   return (
     <View style={styles.container}>
 
@@ -94,9 +97,9 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Añade Fotos</Text>
           <View style={styles.photosContainer}>
-            <PhotoSelector text={"+"} onPress={null}/>
-            <PhotoSelector text={"+"} onPress={null}/>
-            <PhotoSelector text={"+"} onPress={null}/>
+            <ImageSelector text={"+"} onImagePicked={onImagePicked}/>
+            <ImageSelector text={"+"} onImagePicked={onImagePicked}/>
+            <ImageSelector text={"+"} onImagePicked={onImagePicked}/>
           </View>
           <Text style={styles.photoDescription}>Las fotos deben describir el animal para ayudar a identificarlo</Text>
         </View>
