@@ -7,3 +7,4 @@ export { default as Input } from "./input/Input";
 export { default as DateSelector } from "./dateSelector/DateSelector";
 export { default as ImageSelector } from "./imageSelector/ImageSelector";
 export { default as Select } from "./select/Select";
+export { default as Modal } from "./modal/Modal";
