@@ -8,3 +8,5 @@ export { default as DateSelector } from "./dateSelector/DateSelector";
 export { default as ImageSelector } from "./imageSelector/ImageSelector";
 export { default as Select } from "./select/Select";
 export { default as Modal } from "./modal/Modal";
+export { default as LocationSelector } from "./locationSelector/LocationSelector";
+export { default as MapPreview } from "./mapPreview/MapPreview";

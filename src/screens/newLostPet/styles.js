@@ -91,10 +91,6 @@ export const styles = StyleSheet.create({
   btnCalendar:{
     margin:0,
   },
-  lossZone:{
-    height:100,
-    borderWidth:1
-  },
   publishBtnContainer:{
     backgroundColor:COLORS.primary,
     borderRadius:10,
