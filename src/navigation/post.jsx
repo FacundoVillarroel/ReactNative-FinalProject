@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { COLORS } from "../constants/colors";
 
-import { Post, NewLostPet, NewFoundPet, NewAdoptionPet } from "../screens";
+import { Post, NewLostPet, NewFoundPet, NewAdoptionPet, Maps } from "../screens";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,14 @@ const PostNavigator = () => {
       <Stack.Screen
         name="NewAdoptionPet"
         component={NewAdoptionPet}
+      />
+      <Stack.Screen
+        name="Maps"
+        component={Maps}
+        options={{
+          headerShown:true,
+          statusBarColor:COLORS.primary
+        }}
       />
     </Stack.Navigator>
   )

@@ -1,13 +1,17 @@
-import { View, TouchableOpacity, Alert } from 'react-native';
-import React, { useState } from 'react';
+import { View, TouchableOpacity, Alert, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import * as Location from "expo-location";
 import MapPreview from "../mapPreview/MapPreview";
-import { URL_GEOCODING } from '../../constants/maps';
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { styles } from "./styles";
+import { getGeocoding } from '../../utils';
 
-const LocationSelector = ({onLocationPicker}) => {
-  const [pickedLocation, setPickedLocation] = useState(null)
+const LocationSelector = ({ onLocationPicker}) => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const [pickedLocation, setPickedLocation] = useState(null);
+  const mapLocation = route?.params?.mapLocation;
 
   const verifyPermissions = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -31,23 +35,39 @@ const LocationSelector = ({onLocationPicker}) => {
 
     const {latitude, longitude} = location.coords
 
-    setPickedLocation({lat: latitude, lng: longitude})
-
-    const response = await fetch(URL_GEOCODING(latitude, longitude))
-      if (!response.ok) throw new Error("no se ha podido conectar con el servicio, inténtalo nuevamente mas tarde");
-      
-      const data = await response.json()
-      if (!data.results) throw new Error("No se ha podido encontrar la dirección seleccionada");
-
-      const address = data.results[0].formatted_address
+    const address = await getGeocoding(latitude, longitude)
+    
+    setPickedLocation({address, coords:{lat: latitude, lng: longitude}})    
     onLocationPicker({address, coords:{lat: latitude, lng: longitude}}, "lossZone")
   }
 
+  useEffect(() => {
+    if (!pickedLocation){
+      onHandleGetLocation()
+    }
+    if (mapLocation) {
+      setPickedLocation(mapLocation)
+      onLocationPicker(mapLocation, "lossZone")
+    }
+  }, [mapLocation])
+
+  const onHandlePickLocation = async () => {
+    const isLocationPermissionGranted = await verifyPermissions();
+
+    if (!isLocationPermissionGranted) return;
+
+    navigation.navigate("Maps", {pickedLocation});
+  };
+
   return (
     <View style={styles.container}>
-      <MapPreview location={pickedLocation} style={styles.mapPreview} onHandleGetLocation={onHandleGetLocation}>
-        <TouchableOpacity style={styles.touchable} onPress={onHandleGetLocation}/>
-      </MapPreview>
+      <TouchableOpacity style={styles.mapContainer} onPress={onHandlePickLocation}> 
+        <MapPreview location={pickedLocation?.coords} style={styles.mapPreview}>
+            <View style={styles.btn}>
+              <Text style={styles.touchableText}>Elegir en el mapa</Text>
+            </View>
+        </MapPreview>
+      </TouchableOpacity>
     </View>
   )
 }

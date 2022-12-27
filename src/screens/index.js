@@ -7,3 +7,4 @@ export { default as Login } from "./login/Login";
 export { default as NewLostPet } from "./newLostPet/NewLostPet";
 export { default as NewFoundPet } from "./newFoundPet/NewFoundPet";
 export { default as NewAdoptionPet } from "./newAdoptionPet/NewAdoptionPet";
+export { default as Maps } from "./maps/Maps";

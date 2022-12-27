@@ -91,6 +91,11 @@ export const styles = StyleSheet.create({
   btnCalendar:{
     margin:0,
   },
+  locationText:{
+    paddingVertical:10,
+    fontFamily:"MartinMono-Light",
+    fontSize:13,
+  },
   publishBtnContainer:{
     backgroundColor:COLORS.primary,
     borderRadius:10,

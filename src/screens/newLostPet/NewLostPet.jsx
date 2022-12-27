@@ -10,19 +10,19 @@ import { onInputChange, UPDATED_FORM } from '../../utils/form';
 import { useDispatch } from 'react-redux';
 
 const initialState = {
-  image:{value: [], error: "", touched:false, hasError:false },
-  name:{value: "", error: "", touched:false, hasError:false },
-  categoryId:{value: "", error: "", touched:false, hasError:false },
-  breed:{value: "", error: "", touched:false, hasError:false },
-  gender:{value: "", error: "", touched:false, hasError:false },
-  hair:{value: "", error: "", touched:false, hasError:false },
-  eyes:{value: "", error: "", touched:false, hasError:false },
+  image:{value: [], error: "", touched:false, hasError:true },
+  name:{value: "", error: "", touched:false, hasError:true },
+  categoryId:{value: "", error: "", touched:false, hasError:true },
+  breed:{value: "", error: "", touched:false, hasError:true },
+  gender:{value: "", error: "", touched:false, hasError:true },
+  hair:{value: "", error: "", touched:false, hasError:true },
+  eyes:{value: "", error: "", touched:false, hasError:true },
   chip:{value: false, error: "", touched:false, hasError:false },
   collar:{value: false, error: "", touched:false, hasError:false },
-  date:{value: "", error: "", touched:false, hasError:false },
+  date:{value: "", error: "", touched:false, hasError:true },
   lossZone:{value: "", error: "", touched:false, hasError:true },
   description:{value: "", error: "", touched:false, hasError:false },
-  contact:{value: "", error: "", touched:false, hasError:false },
+  contact:{value: "", error: "", touched:false, hasError:true },
   isFormValid: false,
 }
 
@@ -226,6 +226,7 @@ const NewLostPet = ({ navigation }) => {
         {/* Zona */}
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>¿En qué zona se ha perdido?</Text>
+          {formState.lossZone.value.address && <Text style={styles.locationText}>{formState.lossZone.value.address}</Text>}
           <LocationSelector onLocationPicker={onHandleChangeInput}/>
         </View>
 
