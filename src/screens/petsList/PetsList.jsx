@@ -4,15 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { styles } from './styles';
 import { PetCard, ButtonFilter } from "../../components"; 
-import { formatDate } from "../../utils"
-import { selectPet, selectCategory, filterPets } from '../../store/actions';
+import { formatDate } from "../../utils";
+import { selectCategory } from '../../store/category.slice';
+import { filterPets, selectPet } from '../../store/pet.slice';
 
 const PetsList = ({ navigation }) => {
   const dispatch = useDispatch();
   const categorySelected = useSelector((state) => state.category.selected)
   
-  const pets = useSelector((state) => state.pets.pets);
-  const filteredPets = useSelector((state) => state.pets.filteredPets)
+  const pets = useSelector((state) => state.pet.pets);
+  const filteredPets = useSelector((state) => state.pet.filteredPets)
   const categories = useSelector((state) => state.category.categories)
   
   useEffect(() => {

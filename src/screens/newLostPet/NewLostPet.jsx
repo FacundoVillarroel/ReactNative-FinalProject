@@ -8,6 +8,7 @@ import { COLORS } from '../../constants/colors';
 import { styles } from "./styles";
 import { onInputChange, UPDATED_FORM } from '../../utils/form';
 import { useDispatch } from 'react-redux';
+import { savePet } from '../../store/pet.slice';
 
 const initialState = {
   image:{value: [], error: "", touched:false, hasError:true },
@@ -47,6 +48,7 @@ const formReducer = (state, action) => {
 }
 
 const NewLostPet = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer( formReducer, initialState)
 
   const [calendarVisible, setCalendarVisible] = useState(false);
@@ -60,7 +62,22 @@ const NewLostPet = ({ navigation }) => {
     if (!formState.isFormValid) {
       Alert.alert("Formulario inválido", "Faltan campos por completar o hay campos erroneos", [{text:"ok"}])
     } else {
-      console.log("MASCOTA:",formState);
+      const pet = {
+        image: formState.image.value,
+        name: formState.name.value,
+        categoryId: formState.categoryId.value,
+        breed: formState.breed.value,
+        gender: formState.gender.value,
+        hair: formState.hair.value,
+        eyes: formState.eyes.value,
+        chip: formState.chip.value,
+        collar: formState.collar.value,
+        date: formState.date.value,
+        lossZone: formState.lossZone.value,
+        description: formState.description.value,
+        contact: formState.contact.value,
+      }
+      dispatch(savePet(pet));
     }
   }
 

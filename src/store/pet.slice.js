@@ -1,0 +1,85 @@
+import {URL_BASE} from "@env";
+import { createSlice } from "@reduxjs/toolkit";
+import { PETS } from "../constants/data/pets";
+
+import Pet from "../models/pet";
+
+const initialState = {
+  pets: PETS,
+  filteredPets:[],
+  selected:null,
+}
+
+const petSlice = createSlice({
+  name:"pet",
+  initialState,
+  reducers:{
+    addPet: (state, action) => {
+      const newPet = new Pet(
+        action.payload.id,
+        action.payload.image,
+        action.payload.name,
+        action.payload.categoryId,
+        action.payload.breed,
+        action.payload.gender,
+        action.payload.hair,
+        action.payload.eyes,
+        action.payload.chip,
+        action.payload.collar,
+        action.payload.date,
+        action.payload.lossZone,
+        action.payload.description,
+        action.payload.contact,
+      )
+      console.warn("NEWPET: ",newPet);
+      state.pets.push(newPet);
+    },
+    updateFilterPets: (state, action) => {
+      const filteredPets = state.pets.filter(pet => pet.categoryId === action.payload.categoryId)
+      state.filteredPets = filteredPets
+    },
+    updateSelectedPet: (state, action) => {
+      const petFound = state.pets.find(pet => pet.id === action.payload.id)
+      if (petFound){ state.selected = petFound} 
+    }
+  },
+});
+
+export const { addPet, updateFilterPets, updateSelectedPet } = petSlice.actions;
+
+export const savePet = (pet) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${URL_BASE}/pets.json`,{
+        method:"POST",
+        headers:{
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({
+          pet
+        }),
+      });
+      
+      const result = await response.json();
+
+      dispatch(addPet({id:result.name, ...pet}))
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export const filterPets = (categoryId) => {
+  return (dispatch) => {
+    dispatch(updateFilterPets({categoryId}))
+  }
+}
+
+export const selectPet = (id) => {
+  return (dispatch) => {
+    dispatch(updateSelectedPet({id}))
+  }
+}
+
+export default petSlice.reducer;

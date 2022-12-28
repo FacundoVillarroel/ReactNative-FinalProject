@@ -2,7 +2,7 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native
 import React, { useReducer } from 'react';
 import { isAndroid } from "../../utils";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../store/actions";
+import { signUp } from "../../store/auth.slice";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
 

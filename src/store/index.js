@@ -1,11 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { categoryReducer, petsReducer, authReducer } from "./reducers";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
 
-const rootReducer = combineReducers({
-  category:categoryReducer,
-  pets: petsReducer,
-  auth: authReducer,
-})
+import petReducer from "./pet.slice";
+import categoryReducer from "./category.slice";
+import authReducer from "./auth.slice";
 
-export default createStore(rootReducer, applyMiddleware(thunk))
+export const store = configureStore({
+  reducer: {
+    auth:authReducer,
+    category:categoryReducer,
+    pet:petReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});

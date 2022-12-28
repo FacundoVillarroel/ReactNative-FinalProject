@@ -7,7 +7,7 @@ import { styles } from './styles';
 import { formatDate } from "../../utils";
 
 const PetDetail = ({navigation}) => {
-  const pet = useSelector((state) => state.pets.selected)
+  const pet = useSelector((state) => state.pet.selected)
 
   const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossLocation, contact, isLost } = pet
 

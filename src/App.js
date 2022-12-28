@@ -1,7 +1,7 @@
 import { View, ActivityIndicator } from 'react-native';
 import { useFonts } from "expo-font";
 import { Provider } from 'react-redux';
-import store from "./store";
+import {store} from "./store";
 import AppNavigator from "./navigation/index"
 
 import { styles } from './styles';
