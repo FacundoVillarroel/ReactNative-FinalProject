@@ -30,9 +30,8 @@ export const styles = StyleSheet.create({
     padding:10
   },
   title:{
-    alignSelf:"center",
     fontFamily:"MartinMono-Bold",
-    fontSize:20,
+    fontSize:16,
     color:COLORS.white,
   },
   dateContainer:{
@@ -42,7 +41,8 @@ export const styles = StyleSheet.create({
   date:{
     fontFamily:"MartinMono-Light",
     color:COLORS.primary,
-    fontSize:11
+    fontSize:11,
+    paddingTop:4
   },
   lossLocation:{
     fontFamily:"MartinMono-Light",

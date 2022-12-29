@@ -6,7 +6,7 @@ import { styles } from './styles';
 import { PetCard, ButtonFilter } from "../../components"; 
 import { formatDate } from "../../utils";
 import { selectCategory } from '../../store/category.slice';
-import { filterPets, selectPet } from '../../store/pet.slice';
+import { filterPets, selectPet, getPets } from '../../store/pet.slice';
 
 const PetsList = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -16,7 +16,8 @@ const PetsList = ({ navigation }) => {
   const filteredPets = useSelector((state) => state.pet.filteredPets)
   const categories = useSelector((state) => state.category.categories)
   
-  useEffect(() => {
+  useEffect(() => { 
+    dispatch(getPets()) 
     if (categorySelected){
       dispatch(filterPets(categorySelected.id))
     }

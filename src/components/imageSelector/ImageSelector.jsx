@@ -1,7 +1,8 @@
-import { TouchableOpacity, Text, Alert, View, Image } from 'react-native';
+import { TouchableOpacity, Text, View, Image } from 'react-native';
 import React, { useState } from 'react';
 import * as ImagePicker from "expo-image-picker";
 import Modal from '../modal/Modal';
+import { verifyPermissionsCamera, verifyPermissionsMediaLibrary, uploadImage } from '../../utils';
 
 import { styles } from './styles';
 
@@ -10,55 +11,34 @@ const ImageSelector = ({text, onImagePicked, style}) => {
   const [modalVisible, setModalVisible] = useState(false)
 
   const onHandleImage = async (option) => {
-    let image = null
+    let result = null
     if ( option === "camera"){
       const isCameraPermissions = await verifyPermissionsCamera();
       if (!isCameraPermissions) return
   
-      image = await ImagePicker.launchCameraAsync({
+      result = await ImagePicker.launchCameraAsync({
         allowsEditing:true,
+        mediaTypes:ImagePicker.MediaTypeOptions.Images,
         aspect: [4,4],
-        quality:1,
+        quality:.8,
       })
     } else {
         const isCameraPermissions = await verifyPermissionsMediaLibrary();
         if (!isCameraPermissions) return
     
-        image = await ImagePicker.launchImageLibraryAsync({
+        result = await ImagePicker.launchImageLibraryAsync({
           allowsEditing:true,
+          mediaTypes:ImagePicker.MediaTypeOptions.Images,
           aspect: [4,4],
-          quality:1,
+          quality:.8,
         })
       }
 
-    if (!image.canceled) {
-      setPickedUrl(image.assets[0].uri)
-      onImagePicked(image.assets[0].uri)
+    if (!result.canceled) {
+      setPickedUrl(result.assets[0].uri)
+      onImagePicked(result.assets[0].uri)
+      /* await uploadImage(result.assets[0].uri,setUploading) */
     }
-  }
-
-  const verifyPermissionsCamera = async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if ( status !== "granted"){
-      Alert.alert(
-        "Permisos insuficientes",
-        "Necesitas dar permisos para usar la cámara", [{text:"Ok"}]
-      )
-      return false
-    }
-    return true 
-  }
-
-  const verifyPermissionsMediaLibrary = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if ( status !== "granted") {
-      Alert.alert(
-        "Permisos insuficientes",
-        "Necesitas dar permisos para utilizar la galeria", [{text:"Ok"}]
-      )
-      return false
-    } 
-    return true
   }
 
   return (

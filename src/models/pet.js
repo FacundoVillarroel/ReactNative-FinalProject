@@ -1,5 +1,5 @@
 class Pet {
-  constructor(id, image, name, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, description, contact ) {
+  constructor(id, image, name, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, description, contact, isLost ) {
     this.id = id.toString();
     this.image = image;
     this.name = name;
@@ -14,6 +14,7 @@ class Pet {
     this.lossZone = lossZone;
     this.description = description;
     this.contact = contact;
+    this.isLost= isLost
   }
 }
 

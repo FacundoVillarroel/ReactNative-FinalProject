@@ -5,14 +5,13 @@ import { default as Card } from "../card/Card";
 import { styles } from './styles';
 
 const PetCard = ({name, image, isLost, gender, date, lossLocation, id, onSelect}) => {
-  
   return (
       <Card>
         <TouchableOpacity style={styles.container} onPress={() => onSelect(id)}>
           <View style={styles.statusContainer}>
             <Text style={styles.status}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
           </View>
-          <Image style={styles.image} source={{uri:image}} resizeMode="stretch"/>
+          <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch"/>
           <View style={styles.detailsContainer}>
             <Text style={styles.title}>{name}</Text>
             <View style={styles.dateContainer}>

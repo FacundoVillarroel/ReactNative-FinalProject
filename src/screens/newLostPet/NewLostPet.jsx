@@ -2,7 +2,8 @@ import { View, Text, ScrollView, TouchableOpacity, Keyboard, Alert } from 'react
 import React, { useReducer, useState } from 'react';
 import { Input, DateSelector, ImageSelector, Select, LocationSelector } from '../../components';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { CATEGORIES } from "../../constants/data/categories"
+import { CATEGORIES } from "../../constants/data/categories";
+import { uploadImage } from '../../utils';
 
 import { COLORS } from '../../constants/colors';
 import { styles } from "./styles";
@@ -58,12 +59,16 @@ const NewLostPet = ({ navigation }) => {
     onInputChange(name, value, dispatchFormState, formState)
   };
 
-  const onHandleSubmit = () => {
-    if (!formState.isFormValid) {
-      Alert.alert("Formulario inválido", "Faltan campos por completar o hay campos erroneos", [{text:"ok"}])
-    } else {
+  const onHandleSubmit = async () => {
+    if (formState.isFormValid) {
+      let images = []
+      for (let i = 0; i < formState.image.value.length; i++) {
+        const imageUrl = formState.image.value[i];
+        images.push(await uploadImage(imageUrl))
+      }
+      
       const pet = {
-        image: formState.image.value,
+        image: images,
         name: formState.name.value,
         categoryId: formState.categoryId.value,
         breed: formState.breed.value,
@@ -76,8 +81,12 @@ const NewLostPet = ({ navigation }) => {
         lossZone: formState.lossZone.value,
         description: formState.description.value,
         contact: formState.contact.value,
+        isLost:true
       }
       dispatch(savePet(pet));
+      Alert.alert("Publicado correctamente !", "encontrara el anuncio en la seccion de 'inico'",[{text:"Ok"}])
+    } else {
+      Alert.alert("Formulario inválido", "Faltan campos por completar o hay campos erroneos", [{text:"ok"}])
     }
   }
 
@@ -166,8 +175,8 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Sexo</Text>
           <View style={styles.genderContainer}>
-            <TouchableOpacity style={styles.touchableGender} onPress={() => onHandleChangeInput("male","gender")}><Ionicons name="male" size={30} color={formState.gender.value === "male" ? COLORS.primary : "black"} /><Text>Macho</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.touchableGender} onPress={() => onHandleChangeInput("female","gender")}><Ionicons name="female" size={30} color={formState.gender.value === "female" ? COLORS.primary :"black"} /><Text>Hembra</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableGender} onPress={() => onHandleChangeInput("macho","gender")}><Ionicons name="male" size={30} color={formState.gender.value === "macho" ? COLORS.primary : "black"} /><Text>Macho</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.touchableGender} onPress={() => onHandleChangeInput("hembra","gender")}><Ionicons name="female" size={30} color={formState.gender.value === "hembra" ? COLORS.primary :"black"} /><Text>Hembra</Text></TouchableOpacity>
             <TouchableOpacity style={styles.touchableGender} onPress={() => onHandleChangeInput("","gender")}><Ionicons name="male-female-sharp" size={30} color={!formState.gender.value ? COLORS.primary : "black"} /><Text>No lo sé</Text></TouchableOpacity>
           </View>
         </View>
