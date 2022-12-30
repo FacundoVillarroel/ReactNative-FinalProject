@@ -14,7 +14,8 @@ const categorySlice = createSlice({
       const indexCategory = state.categories.findIndex(
         (category) => category.id === action.payload.categoryId
       );
-      if (indexCategory !== -1) state.selected = state.categories[indexCategory]
+      if (indexCategory !== -1) {state.selected = state.categories[indexCategory]}
+      else {state.selected = state.categories}
     }
   }
 })

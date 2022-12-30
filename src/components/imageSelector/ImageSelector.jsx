@@ -37,7 +37,6 @@ const ImageSelector = ({text, onImagePicked, style}) => {
     if (!result.canceled) {
       setPickedUrl(result.assets[0].uri)
       onImagePicked(result.assets[0].uri)
-      /* await uploadImage(result.assets[0].uri,setUploading) */
     }
   }
 

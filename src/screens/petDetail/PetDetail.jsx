@@ -20,7 +20,7 @@ const PetDetail = ({navigation}) => {
       <View style={styles.imageContainer}>
         <ButtonClose onPress={onClose}/>
         <Text style={styles.isLost}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
-        <Image style={styles.image} source={{uri:image[0]}}/>
+        <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch" />
       </View>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.descriptionText}>{description}</Text>

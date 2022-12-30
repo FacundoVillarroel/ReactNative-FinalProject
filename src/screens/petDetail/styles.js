@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor:COLORS.background,
   },
   imageContainer:{
-    flex:1
+    flex:1,
   },
   isLost:{
     position:"absolute",
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   image:{
     width:"100%",
-    height:250
+    height:300
   },
   title:{
     color:COLORS.primary,
