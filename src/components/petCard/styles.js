@@ -12,8 +12,7 @@ export const styles = StyleSheet.create({
   statusContainer:{
     flex:1,
     alignItems:"center",
-    backgroundColor:COLORS.danger,
-    opacity:0.6
+    height:30,
   },
   status:{
     color:COLORS.white,

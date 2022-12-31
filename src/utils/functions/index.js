@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import { URL_GEOCODING } from '../../constants/maps';
 import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
 import { Alert } from 'react-native';
 import { firebase } from "../../constants/firebase/config";
 
@@ -20,6 +21,18 @@ export const getGeocoding = async (latitude, longitude) => {
   if (!data.results) throw new Error("No se ha podido encontrar la dirección seleccionada");
 
   return data.results[0].formatted_address
+}
+
+export const verifyPermissionsGps = async () => {
+  const { status } = await Location.requestForegroundPermissionsAsync();
+  if ( status !== "granted") {
+    Alert.alert(
+      "Permisos insuficientes",
+      "Necesitas dar permisos para acceder a la ubicación", [{text:"Ok."}]
+    )
+    return false
+  }
+  return true
 }
 
 export const verifyPermissionsMediaLibrary = async () => {

@@ -37,7 +37,6 @@ export const styles = StyleSheet.create ({
   },
   optionTouchable:{
     borderRadius:5,
-    backgroundColor:COLORS.primary,
     marginVertical:10,
     padding:5,
     height:90

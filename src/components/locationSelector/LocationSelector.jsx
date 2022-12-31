@@ -5,7 +5,7 @@ import MapPreview from "../mapPreview/MapPreview";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { styles } from "./styles";
-import { getGeocoding } from '../../utils';
+import { getGeocoding, verifyPermissionsGps } from '../../utils';
 
 const LocationSelector = ({ onLocationPicker}) => {
   const navigation = useNavigation();
@@ -13,20 +13,8 @@ const LocationSelector = ({ onLocationPicker}) => {
   const [pickedLocation, setPickedLocation] = useState(null);
   const mapLocation = route?.params?.mapLocation;
 
-  const verifyPermissions = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if ( status !== "granted") {
-      Alert.alert(
-        "Permisos insuficientes",
-        "Necesitas dar permisos para acceder a la ubicación", [{text:"Ok."}]
-      )
-      return false
-    }
-    return true
-  }
-
   const onHandleGetLocation = async () => {
-    const isLocationPermission = await verifyPermissions();
+    const isLocationPermission = await verifyPermissionsGps();
     if (!isLocationPermission) return
 
     const location = await Location.getCurrentPositionAsync({
@@ -49,10 +37,10 @@ const LocationSelector = ({ onLocationPicker}) => {
       setPickedLocation(mapLocation)
       onLocationPicker(mapLocation, "lossZone")
     }
-  }, [mapLocation])
+  }, [mapLocation, pickedLocation])
 
   const onHandlePickLocation = async () => {
-    const isLocationPermissionGranted = await verifyPermissions();
+    const isLocationPermissionGranted = await verifyPermissionsGps();
 
     if (!isLocationPermissionGranted) return;
 

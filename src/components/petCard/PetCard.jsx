@@ -3,12 +3,15 @@ import React from 'react';
 import { default as Card } from "../card/Card";
 
 import { styles } from './styles';
+import { COLORS } from '../../constants/colors';
 
 const PetCard = ({name, image, isLost, gender, date, lossLocation, id, onSelect}) => {
+  const color = isLost ? COLORS.danger : COLORS.light 
+
   return (
       <Card>
         <TouchableOpacity style={styles.container} onPress={() => onSelect(id)}>
-          <View style={styles.statusContainer}>
+          <View style={{...styles.statusContainer, backgroundColor:color}}>
             <Text style={styles.status}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
           </View>
           <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch"/>
