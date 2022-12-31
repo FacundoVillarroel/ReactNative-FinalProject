@@ -56,10 +56,31 @@ export const styles = StyleSheet.create({
     fontSize:14,
     paddingTop:20
   },
-  lossLocation:{
+  lossZoneContainer:{
+    marginVertical:10,
+    padding:10,
+
+    shadowColor: COLORS.secondary,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+
+    elevation: 7,
+  },
+  lossZoneTitleContainer:{
+    margin:5,
+    flex:1,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-between",
+  },
+  lossZoneTitle:{
     fontFamily:"MartinMono-Light",
-    fontSize:14,
-    paddingVertical:5
+    fontSize:9.5,
+    paddingVertical:10
   },
   contact:{
     padding:10,

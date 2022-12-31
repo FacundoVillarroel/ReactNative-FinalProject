@@ -1,7 +1,7 @@
 import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import React, { useReducer } from 'react';
 import { isAndroid } from "../../utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../store/auth.slice";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
@@ -39,6 +39,7 @@ const formReducer = (state, action) => {
 const Register = ({navigation}) => {
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
+  const authError = useSelector(state => state.auth.error)
 
   const onHandleSubmit = () => {
     dispatch(signUp(formState.email.value, formState.password.value));
@@ -66,8 +67,8 @@ const Register = ({navigation}) => {
                 placeholderTextColor={COLORS.light}
                 keyboardType="email-address"
                 value={formState.email.value}
-                hasError={formState.email.hasError}
-                error={formState.email.error}
+                hasError={formState.email.hasError || authError}
+                error={formState.email.error || authError}
                 touched={formState.email.touched}
               />
               <Input 

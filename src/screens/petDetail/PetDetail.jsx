@@ -1,15 +1,16 @@
 import { View, Text, Image, ScrollView } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons'; 
 
-import { PetDetailItem, ButtonClose } from '../../components';
+import { PetDetailItem, ButtonClose, MapPreview } from '../../components';
 import { styles } from './styles';
-import { formatDate } from "../../utils";
+import { COLORS } from '../../constants/colors';
 
 const PetDetail = ({navigation}) => {
   const pet = useSelector((state) => state.pet.selected)
 
-  const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossLocation, contact, isLost } = pet
+  const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, isLost } = pet
 
   const onClose = () => {
     return navigation.navigate("PetsList")
@@ -33,10 +34,16 @@ const PetDetail = ({navigation}) => {
         <PetDetailItem description="Ojos" text={eyes}/>
         <PetDetailItem description="Chip" text={chip ? "Si" : "No"}/>
         <PetDetailItem description="Collar" text={collar ? "Si": "No"}/>
-        <Text style={styles.date}>{formatDate(date)}</Text>
-        <Text style={styles.lossLocation}>{lossLocation}</Text>
+        <PetDetailItem description="Se perdió el" text={date} />
+        <View style={styles.lossZoneContainer}>
+          <View style={styles.lossZoneTitleContainer}>
+            <Ionicons name="location" size={18} color={COLORS.secondary} />
+            <Text style={styles.lossZoneTitle}>{lossZone.address}</Text>
+          </View>
+          <MapPreview location={lossZone.coords}/>
+        </View>
       </View>
-      <Text style={styles.contact}>Contact: {contact}</Text>
+      <Text style={styles.contact}>Contacto: {contact}</Text>
     </ScrollView>
   )
 }

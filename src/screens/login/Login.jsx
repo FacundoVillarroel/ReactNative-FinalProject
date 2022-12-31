@@ -1,7 +1,7 @@
 import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import React, { useReducer } from 'react';
 import { isAndroid } from "../../utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../store/auth.slice";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
@@ -39,6 +39,7 @@ const formReducer = (state, action) => {
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
+  const authError = useSelector(state => state.auth.error)
 
   const onHandleSubmit = () => {
     dispatch(signIn(formState.email.value, formState.password.value));
@@ -66,8 +67,8 @@ const Login = ({navigation}) => {
                 placeholderTextColor={COLORS.light}
                 keyboardType="email-address"
                 value={formState.email.value}
-                hasError={formState.email.hasError}
-                error={formState.email.error}
+                hasError={formState.email.hasError || authError === "Email no registrado"}
+                error={formState.email.error || authError}
                 touched={formState.email.touched}
               />
               <Input 
@@ -77,8 +78,8 @@ const Login = ({navigation}) => {
                 placeholder="Ingrese su Contraseña"
                 placeholderTextColor={COLORS.light}
                 value={formState.password.value}
-                hasError={formState.password.hasError}
-                error={formState.password.error}
+                hasError={formState.password.hasError || authError === "Contraseña incorrecta"}
+                error={formState.password.error || authError}
                 touched={formState.password.touched}
                 type="password"
               />

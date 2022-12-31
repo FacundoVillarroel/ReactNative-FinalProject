@@ -41,7 +41,7 @@ const Tabs = () => {
         options={{
           title:"Inicio",
           tabBarIcon:({ focused }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={25} color={COLORS.dark}/>
+            <Ionicons name={focused ? "home" : "home-outline"} size={25} color={COLORS.white}/>
           )
         }}
       />
@@ -51,7 +51,7 @@ const Tabs = () => {
         options={{
           title:"Anunciar",
           tabBarIcon:({ focused }) => (
-            <Ionicons name={focused ? "add-circle" : "add-circle-outline"} size={30} color={COLORS.dark}/>
+            <Ionicons name={focused ? "add-circle" : "add-circle-outline"} size={30} color={COLORS.white}/>
           )
         }}
       />
@@ -61,7 +61,7 @@ const Tabs = () => {
         options={{
           title:"Perfil",
           tabBarIcon:({ focused }) => (
-            <Ionicons name={focused ? "ios-person" : "ios-person-outline"} size={25} color={COLORS.dark}/>
+            <Ionicons name={focused ? "ios-person" : "ios-person-outline"} size={25} color={COLORS.white}/>
           )
         }}
       />

@@ -188,10 +188,7 @@ const NewLostPet = ({ navigation }) => {
             <TouchableOpacity 
               style={styles.touchableAppearance} 
               onPress={() => setAppearanceToSelect("hair")}>
-              <MaterialIcons 
-                name="grass" 
-                size={30} 
-                color={formState.hair.value ? COLORS.primary : "black"} 
+              <MaterialIcons name="grass" size={30} color={formState.hair.value ? COLORS.primary : "black"} 
               />
               <Text>{formState.hair.value ? formState.hair.value : "Pelo"}</Text>
               {formState.hair.hasError ? <Text style={styles.errorText}>{formState.hair.error}</Text>: null}
@@ -199,10 +196,7 @@ const NewLostPet = ({ navigation }) => {
             <TouchableOpacity 
               style={styles.touchableAppearance} 
               onPress={() => setAppearanceToSelect("eyes")}>
-              <Ionicons 
-                name="eye-outline" 
-                size={30} 
-                color={formState.eyes.value ? COLORS.primary : "black"} 
+              <Ionicons name="eye-outline" size={30} color={formState.eyes.value ? COLORS.primary : "black"} 
               />
               <Text>{formState.eyes.value ? formState.eyes.value : "Ojos"}</Text>
               {formState.eyes.hasError ? <Text style={styles.errorText}>{formState.eyes.error}</Text>: null}

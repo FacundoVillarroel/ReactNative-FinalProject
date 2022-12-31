@@ -5,6 +5,7 @@ import { URL_AUTH_SIGN_UP, URL_AUTH_SIGN_IN } from "../constants/firebase";
 const initialState = {
   token:null,
   userId:null,
+  error:null
 }
 
 const authSlice = createSlice({
@@ -12,12 +13,21 @@ const authSlice = createSlice({
   initialState,
   reducers:{
     sign_up: (state, action) => {
+      let error = action.payload.error
+      if (action.payload.error === "EMAIL_EXISTS") error = "El email ingresado ya esta registrado"
+
       state.token = action.payload.token
       state.userId = action.payload.userId
+      state.error = error
     },
     sign_in: (state, action) => {
+      let error = action.payload.error
+      if (action.payload.error === "EMAIL_NOT_FOUND") error = "Email no registrado";
+      else if(action.payload.error === "INVALID_PASSWORD") error = "Contraseña incorrecta";
+
       state.token = action.payload.token
       state.userId = action.payload.userId
+      state.error = error
     },
   },
 });
@@ -39,15 +49,12 @@ export const signUp = (email, password) => {
           returnSecureToken: true,
         }),
       });
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
       
       const data = await response.json();
 
-      dispatch(sign_up({token:data.idToken, userId:data.localId}))
+      dispatch(sign_up({token:data.idToken, userId:data.localId, error:data.error?.message}))
     } catch (error) {
-      throw error;
+      console.log(error);
     }
   }
 }
@@ -68,9 +75,10 @@ export const signIn = (email, password) => {
       });
 
       const data = await response.json();
-      dispatch(sign_in({token:data.idToken, userId:data.localId}));
+
+      dispatch(sign_in({token:data.idToken, userId:data.localId, error:data.error?.message}));
     } catch (error) {
-      throw error;
+      console.log("Error:", error);
     }
   }
 }
