@@ -32,7 +32,7 @@ const petSlice = createSlice({
         action.payload.lossZone,
         action.payload.description,
         action.payload.contact,
-        action.payload.isLost
+        action.payload.status
       )
       state.pets.push({...newPet});
     },

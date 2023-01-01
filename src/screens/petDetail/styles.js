@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   imageContainer:{
     flex:1,
   },
-  isLost:{
+  status:{
     position:"absolute",
     zIndex:100,
     bottom:10,
@@ -19,7 +19,6 @@ export const styles = StyleSheet.create({
     borderRadius:10,
     padding:5,
     fontFamily:"MartinMono-Regular",
-    color:COLORS.danger,
     opacity:0.8,
     
   },

@@ -10,8 +10,15 @@ import { COLORS } from '../../constants/colors';
 const PetDetail = ({navigation}) => {
   const pet = useSelector((state) => state.pet.selected)
 
-  const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, isLost } = pet
+  const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet
 
+  const color = status === "lost" ? COLORS.danger : status === "found" ? COLORS.success : COLORS.light 
+  let statusText = "En adopción"
+  if (status === "lost") {
+    gender === "hembra" ? statusText = "Perdida" : statusText = "Perdido"
+  } else if( status === "found") {
+    gender === "hembra" ? statusText = "Encontrada" : statusText = "Encontrado"
+  }
   const onClose = () => {
     return navigation.navigate("PetsList")
   }
@@ -20,7 +27,7 @@ const PetDetail = ({navigation}) => {
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <ButtonClose onPress={onClose}/>
-        <Text style={styles.isLost}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
+        <Text style={{...styles.status, color:color}}>{statusText}</Text>
         <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch" />
       </View>
       <Text style={styles.title}>{name}</Text>

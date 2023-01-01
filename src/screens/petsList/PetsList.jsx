@@ -36,7 +36,7 @@ const PetsList = ({ navigation }) => {
     <PetCard 
       name={item.name} 
       image={item.image} 
-      isLost={item.isLost}
+      status={item.status}
       gender={item.gender} 
       date={formatDate(item.date)}
       lossLocation={item.lossLocation}

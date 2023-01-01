@@ -5,14 +5,19 @@ import { default as Card } from "../card/Card";
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 
-const PetCard = ({name, image, isLost, gender, date, lossLocation, id, onSelect}) => {
-  const color = isLost ? COLORS.danger : COLORS.light 
-
+const PetCard = ({name, image, status, gender, date, lossLocation, id, onSelect}) => {
+  const color = status === "lost" ? COLORS.danger : status === "found" ? COLORS.success : COLORS.light 
+  let statusText = "En adopción"
+  if (status === "lost") {
+    gender === "hembra" ? statusText = "Perdida" : statusText = "Perdido"
+  } else if( status === "found") {
+    gender === "hembra" ? statusText = "Encontrada" : statusText = "Encontrado"
+  }
   return (
       <Card>
         <TouchableOpacity style={styles.container} onPress={() => onSelect(id)}>
           <View style={{...styles.statusContainer, backgroundColor:color}}>
-            <Text style={styles.status}>{isLost ? "Perdid": "Encontrad"}{gender === "macho" ? "o" : "a"}</Text>
+            <Text style={styles.status}>{statusText}</Text>
           </View>
           <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch"/>
           <View style={styles.detailsContainer}>

@@ -81,10 +81,12 @@ const NewLostPet = ({ navigation }) => {
         lossZone: formState.lossZone.value,
         description: formState.description.value,
         contact: formState.contact.value,
-        isLost:true
+        status:"lost"
       }
       dispatch(savePet(pet));
-      Alert.alert("Publicado correctamente !", "encontrara el anuncio en la seccion de 'inico'",[{text:"Ok"}])
+      Alert.alert("Publicado correctamente !", "encontrará el anuncio en la seccion de 'inico'",[{text:"Ok"}])
+      navigation.navigate("Post")
+      navigation.navigate("Home")
     } else {
       Alert.alert("Formulario inválido", "Faltan campos por completar o hay campos erroneos", [{text:"ok"}])
     }
@@ -247,7 +249,7 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>¿En qué zona se ha perdido?</Text>
           {formState.lossZone.value.address && <Text style={styles.locationText}>{formState.lossZone.value.address}</Text>}
-          <LocationSelector onLocationPicker={onHandleChangeInput}/>
+          <LocationSelector onLocationPicker={onHandleChangeInput} prevRoute="NewLostPet"/>
         </View>
 
         {/* Descripcion */}

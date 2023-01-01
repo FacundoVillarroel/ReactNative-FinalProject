@@ -8,11 +8,11 @@ import { COLORS } from "../../constants/colors";
 import { styles } from "./styles";
 
 const Maps = ({ navigation, route }) => {
-  const { pickedLocation } = route.params
+  const { pickedLocation, prevRoute } = route.params
   const [selectedLocation, setSelectedLocation] = useState(pickedLocation);
   const initialRegion = {
-    latitude: selectedLocation.coords.lat,
-    longitude: selectedLocation.coords.lng,
+    latitude: selectedLocation?.coords?.lat,
+    longitude: selectedLocation?.coords?.lng,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
@@ -32,7 +32,7 @@ const Maps = ({ navigation, route }) => {
   };
 
   const onHandleSaveLocation = () => {
-    if (selectedLocation) navigation.navigate("NewLostPet", { mapLocation: selectedLocation });
+    if (selectedLocation) navigation.navigate(prevRoute, { mapLocation: selectedLocation });
   };
 
   useLayoutEffect(() => {

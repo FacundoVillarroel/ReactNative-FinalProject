@@ -7,7 +7,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { styles } from "./styles";
 import { getGeocoding, verifyPermissionsGps } from '../../utils';
 
-const LocationSelector = ({ onLocationPicker}) => {
+const LocationSelector = ({ onLocationPicker, prevRoute}) => {
   const navigation = useNavigation();
   const route = useRoute();
   const [pickedLocation, setPickedLocation] = useState(null);
@@ -44,7 +44,7 @@ const LocationSelector = ({ onLocationPicker}) => {
 
     if (!isLocationPermissionGranted) return;
 
-    navigation.navigate("Maps", {pickedLocation});
+    navigation.navigate("Maps", {pickedLocation, prevRoute});
   };
 
   return (
