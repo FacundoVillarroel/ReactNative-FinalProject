@@ -41,7 +41,7 @@ const PetDetail = ({navigation}) => {
         <PetDetailItem description="Ojos" text={eyes}/>
         <PetDetailItem description="Chip" text={chip ? "Si" : "No"}/>
         <PetDetailItem description="Collar" text={collar ? "Si": "No"}/>
-        <PetDetailItem description="Se perdió el" text={date} />
+        <PetDetailItem description="Fecha" text={date} />
         <View style={styles.lossZoneContainer}>
           <View style={styles.lossZoneTitleContainer}>
             <Ionicons name="location" size={18} color={COLORS.secondary} />

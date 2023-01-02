@@ -6,5 +6,9 @@ export const CATEGORIES = [
   {
     id:"gato",
     title:"gato"
+  },
+  {
+    id:"todos",
+    title:"todos"
   }
 ]

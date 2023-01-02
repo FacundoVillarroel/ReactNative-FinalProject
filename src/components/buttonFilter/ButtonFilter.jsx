@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 
 import { styles } from './styles';
 
-const ButtonFilter = ({categories, onSelect}) => { /* filter component */
+const ButtonFilter = ({categories, onSelectCategory, onSelectStatus}) => { 
   const [modalVisible, setModalVisible] = useState(false)
   const CATEGORIES = categories.map(category => category.id)
-  CATEGORIES.push("todos")
+  const statusList = ["Perdidos", "Encontrados", "En Adopción"]
 
   const onFilter = () => {
     setModalVisible(!modalVisible)
@@ -14,11 +14,24 @@ const ButtonFilter = ({categories, onSelect}) => { /* filter component */
 
   const onCategory = (id) => {
     setModalVisible(!modalVisible)
-    onSelect(id)
+    onSelectCategory(id)
   }
 
-  const renderItem = ({item}) => (
+  const onStatus = (id) => {
+    let status = "lost"
+    id === "Encontrados" ? status = "found" : id === "En Adopción" ? status = "adoption" : null
+    setModalVisible(!modalVisible)
+    onSelectStatus(status)
+  }
+
+  const renderItemCategories = ({item}) => (
     <TouchableOpacity onPress={() => onCategory(item)} style={styles.categoryContainer}>
+      <Text style={styles.category}>{item}</Text>
+    </TouchableOpacity>
+  )
+  
+  const renderItemStatus = ({item}) => (
+    <TouchableOpacity onPress={() => onStatus(item)} style={styles.categoryContainer}>
       <Text style={styles.category}>{item}</Text>
     </TouchableOpacity>
   )
@@ -29,17 +42,33 @@ const ButtonFilter = ({categories, onSelect}) => { /* filter component */
         <Text style={styles.touchableText}>Filtrar</Text>
       </TouchableOpacity>
       <Modal visible={modalVisible} animationType="slide">
+
+        {/* List of Categories */}
         <View style={styles.modalContainer}>
+          <Text style={styles.title} > Filtrar Por: </Text>
           <View style={styles.optionsContainer}>
             <Text style={styles.optionTitle}>Tipo de mascota:</Text>
             <FlatList 
               data={CATEGORIES}
               keyExtractor= {item => item}
               style={styles.categoriesContainer}
-              renderItem={renderItem}
-              numColumns={2}
+              renderItem={renderItemCategories}
+              numColumns={CATEGORIES.length+1}
             />
           </View>
+
+          {/* List of Status */}
+          <View style={styles.optionsContainer}>
+            <Text style={styles.optionTitle}>Estado de la mascota:</Text>
+            <FlatList 
+              data={statusList}
+              keyExtractor= {item => item}
+              style={styles.categoriesContainer}
+              renderItem={renderItemStatus}
+              numColumns={CATEGORIES.length+1}
+            />
+          </View>
+          
           <TouchableOpacity style={styles.modalButton} onPress={onFilter}>
             <Text style={styles.modalText}>Cerrar</Text>
           </TouchableOpacity>

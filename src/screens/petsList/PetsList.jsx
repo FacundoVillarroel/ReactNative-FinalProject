@@ -6,22 +6,24 @@ import { styles } from './styles';
 import { PetCard, ButtonFilter } from "../../components"; 
 import { formatDate } from "../../utils";
 import { selectCategory } from '../../store/category.slice';
+import { selectStatus } from "../../store/status.slice";
 import { filterPets, selectPet, getPets } from '../../store/pet.slice';
 
 const PetsList = ({ navigation }) => {
   const dispatch = useDispatch();
   const categorySelected = useSelector((state) => state.category.selected)
-  
+  const statusSelected = useSelector((state) => state.status.selected)
+
   const pets = useSelector((state) => state.pet.pets);
   const filteredPets = useSelector((state) => state.pet.filteredPets)
   const categories = useSelector((state) => state.category.categories)
   
   useEffect(() => { 
     dispatch(getPets()) 
-    if (categorySelected){
-      dispatch(filterPets(categorySelected.id))
+    if (categorySelected || statusSelected){
+      dispatch(filterPets({categoryId:categorySelected?.id, statusId:statusSelected?.id}))
     }
-  },[categorySelected])
+  },[categorySelected, statusSelected])
   
   const onSelectPet = (id) => {
     dispatch(selectPet(id))
@@ -30,6 +32,10 @@ const PetsList = ({ navigation }) => {
 
   const onSelectCategory= (id) => {
     dispatch(selectCategory(id))
+  }
+
+  const onSelectStatus= (id) => {
+    dispatch(selectStatus(id))
   }
 
   const renderItem = ( {item} ) => (
@@ -47,7 +53,7 @@ const PetsList = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ButtonFilter categories={categories} onSelect={onSelectCategory}/>
+      <ButtonFilter categories={categories} onSelectCategory={onSelectCategory} onSelectStatus={onSelectStatus}/>
       <FlatList
         style={styles.flatList}
         data={filteredPets.length === 0 ? pets : filteredPets}

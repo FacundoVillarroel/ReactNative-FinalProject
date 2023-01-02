@@ -19,29 +19,40 @@ export const styles = StyleSheet.create({
   },
   modalContainer:{
     flex:1,
-    justifyContent:"space-between",
+    backgroundColor:COLORS.primary
+  },
+  title:{
+    fontFamily:"MartinMono-Bold",
+    alignSelf:"center",
+    fontSize:20,
+    padding:20,
+    color:COLORS.white,
   },
   optionsContainer:{
-    backgroundColor:COLORS.primary
+    borderTopWidth:1,
+    borderColor:COLORS.white
   },
   optionTitle:{
     fontFamily:"MartinMono-Regular",
-    alignSelf:"center",
-    fontSize:20,
+    fontSize:18,
     padding:20
   },
   categoriesContainer:{
-    flexDirection:"row",
+    width:"100%",
   },
   modalButton:{
     alignItems:"center",
     padding:10,
-    backgroundColor:COLORS.secondary
+    backgroundColor:COLORS.secondary,
+    width:"100%",
+    position:"absolute",
+    bottom:20
   },
   modalText:{
     fontFamily:"MartinMono-Regular"
   },
   categoryContainer:{
+    flexWrap:"wrap",
     backgroundColor:COLORS.white,
     margin:10,
     padding:10,
