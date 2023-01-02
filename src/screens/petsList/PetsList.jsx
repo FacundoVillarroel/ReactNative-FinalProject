@@ -1,9 +1,9 @@
 import React,{ useEffect} from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"; 
 
 import { styles } from './styles';
-import { PetCard, ButtonFilter } from "../../components"; 
+import { PetCard, ButtonFilter, NotFoundCard } from "../../components"; 
 import { formatDate } from "../../utils";
 import { selectCategory } from '../../store/category.slice';
 import { selectStatus } from "../../store/status.slice";
@@ -58,13 +58,16 @@ const PetsList = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ButtonFilter onSelectCategory={onSelectCategory} onSelectStatus={onSelectStatus} />
-      <FlatList
-        style={styles.flatList}
-        data={petsToShow()}
-        renderItem={renderItem}
-        numColumns={2}
-        keyExtractor= {item => item.id.toString()}
-      />
+      {petsToShow().length === 0 
+      ? <NotFoundCard error={"No hay mascotas que coincidan con tu búsqueda"} message="Prueba aplicando otros filtros"/>
+      : <FlatList
+          style={styles.flatList}
+          data={petsToShow()}
+          renderItem={renderItem}
+          numColumns={2}
+          keyExtractor= {item => item.id.toString()}
+        />
+      }
     </View>
   )
 }

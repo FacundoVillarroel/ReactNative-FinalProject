@@ -10,7 +10,7 @@ const AppNavigator = () => {
   
   return(
     <NavigationContainer>
-      {true ? <Tabs /> : <Auth/>}
+      {userId ? <Tabs /> : <Auth/>}
     </NavigationContainer>
   )
 }

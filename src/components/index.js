@@ -10,3 +10,4 @@ export { default as Select } from "./select/Select";
 export { default as Modal } from "./modal/Modal";
 export { default as LocationSelector } from "./locationSelector/LocationSelector";
 export { default as MapPreview } from "./mapPreview/MapPreview";
+export { default as NotFoundCard } from "./notFoundCard/NotFoundCard";
