@@ -15,16 +15,21 @@ export const styles = StyleSheet.create({
   },
   titleContainer:{
     flex:.9,
-    alignItems:"center",
     justifyContent:"center",
+    alignItems:"center",
+  },
+  logo:{
+    height:120,
+    width:120,
   },
   title:{
     fontSize:26,
-    color:COLORS.white,
+    color:COLORS.primary,
     fontFamily:"MartinMono-Bold",
   },
   inputsContainer:{
     flex:1,
+    marginTop:30,
     justifyContent:"center"
   },
   icon:{

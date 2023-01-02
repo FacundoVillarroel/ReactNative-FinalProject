@@ -1,10 +1,11 @@
-import { View, Text, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image } from 'react-native';
 import React, { useReducer } from 'react';
 import { isAndroid } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../store/auth.slice";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
+import mipetLogo from "../../../assets/mipetLogo.png";
 
 import { Input } from '../../components';
 import { styles } from "./styles";
@@ -52,11 +53,12 @@ const Login = ({navigation}) => {
   return (
     <KeyboardAvoidingView
       style={styles.keyboardContainer}
-      behavior={isAndroid ? 'height' : 'padding'}
+      behavior={isAndroid ? 'heigth' : 'padding'}
       enabled>
         <View style={styles.container}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Titulo De La App</Text>
+            <Image source={mipetLogo} style={styles.logo}/>
+            <Text style={styles.title}>Mipet</Text>
           </View>
           <View style={styles.inputsContainer}>
               <Input 
