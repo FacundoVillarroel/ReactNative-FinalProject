@@ -1,38 +1,38 @@
 import { TouchableOpacity, Text, Modal, View, FlatList } from 'react-native';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { styles } from './styles';
 
-const ButtonFilter = ({categories, onSelectCategory, onSelectStatus}) => { 
+const ButtonFilter = ({ onSelectCategory, onSelectStatus}) => { 
+  const categories = useSelector((state) => state.category.categories)
+  const statusList = useSelector((state) => state.status.status)
+  const categorySelected = useSelector((state) => state.category.selected)
+  const statusSelected = useSelector((state) => state.status.selected)
+
   const [modalVisible, setModalVisible] = useState(false)
-  const CATEGORIES = categories.map(category => category.id)
-  const statusList = ["Perdidos", "Encontrados", "En Adopción"]
 
   const onFilter = () => {
     setModalVisible(!modalVisible)
   }
 
   const onCategory = (id) => {
-    setModalVisible(!modalVisible)
     onSelectCategory(id)
   }
 
   const onStatus = (id) => {
-    let status = "lost"
-    id === "Encontrados" ? status = "found" : id === "En Adopción" ? status = "adoption" : null
-    setModalVisible(!modalVisible)
-    onSelectStatus(status)
+    onSelectStatus(id)
   }
 
   const renderItemCategories = ({item}) => (
-    <TouchableOpacity onPress={() => onCategory(item)} style={styles.categoryContainer}>
-      <Text style={styles.category}>{item}</Text>
+    <TouchableOpacity onPress={() => onCategory(item.id)} style={{...styles.categoryContainer, ...(categorySelected?.id === item.id ? styles.selected : null)}}>
+      <Text style={{...styles.category, ...(categorySelected?.id === item.id ? styles.selectedText : null)}}>{item.title}</Text>
     </TouchableOpacity>
   )
   
   const renderItemStatus = ({item}) => (
-    <TouchableOpacity onPress={() => onStatus(item)} style={styles.categoryContainer}>
-      <Text style={styles.category}>{item}</Text>
+    <TouchableOpacity onPress={() => onStatus(item.id)} style={{...styles.categoryContainer, ...(statusSelected?.id === item.id ? styles.selected : null)}}>
+      <Text style={{...styles.category, ...(statusSelected?.id === item.id ? styles.selectedText : null)}}>{item.title}</Text>
     </TouchableOpacity>
   )
 
@@ -49,11 +49,11 @@ const ButtonFilter = ({categories, onSelectCategory, onSelectStatus}) => {
           <View style={styles.optionsContainer}>
             <Text style={styles.optionTitle}>Tipo de mascota:</Text>
             <FlatList 
-              data={CATEGORIES}
+              data={categories}
               keyExtractor= {item => item}
               style={styles.categoriesContainer}
               renderItem={renderItemCategories}
-              numColumns={CATEGORIES.length+1}
+              numColumns={3}
             />
           </View>
 
@@ -65,12 +65,12 @@ const ButtonFilter = ({categories, onSelectCategory, onSelectStatus}) => {
               keyExtractor= {item => item}
               style={styles.categoriesContainer}
               renderItem={renderItemStatus}
-              numColumns={CATEGORIES.length+1}
+              numColumns={3}
             />
           </View>
           
           <TouchableOpacity style={styles.modalButton} onPress={onFilter}>
-            <Text style={styles.modalText}>Cerrar</Text>
+            <Text style={styles.modalText}>Aplicar</Text>
           </TouchableOpacity>
         </View>
       </Modal>

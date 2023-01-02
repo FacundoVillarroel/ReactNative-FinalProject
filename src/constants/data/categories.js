@@ -8,7 +8,7 @@ export const CATEGORIES = [
     title:"gato"
   },
   {
-    id:"todos",
+    id:"all",
     title:"todos"
   }
 ]

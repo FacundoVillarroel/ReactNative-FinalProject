@@ -16,8 +16,7 @@ const PetsList = ({ navigation }) => {
 
   const pets = useSelector((state) => state.pet.pets);
   const filteredPets = useSelector((state) => state.pet.filteredPets)
-  const categories = useSelector((state) => state.category.categories)
-  
+
   useEffect(() => { 
     dispatch(getPets()) 
     if (categorySelected || statusSelected){
@@ -51,12 +50,17 @@ const PetsList = ({ navigation }) => {
     />
   )
 
+  const petsToShow = () => {
+    if (!categorySelected && !statusSelected) return pets
+    return filteredPets
+  }
+
   return (
     <View style={styles.container}>
-      <ButtonFilter categories={categories} onSelectCategory={onSelectCategory} onSelectStatus={onSelectStatus}/>
+      <ButtonFilter onSelectCategory={onSelectCategory} onSelectStatus={onSelectStatus} />
       <FlatList
         style={styles.flatList}
-        data={filteredPets.length === 0 ? pets : filteredPets}
+        data={petsToShow()}
         renderItem={renderItem}
         numColumns={2}
         keyExtractor= {item => item.id.toString()}

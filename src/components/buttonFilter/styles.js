@@ -28,6 +28,12 @@ export const styles = StyleSheet.create({
     padding:20,
     color:COLORS.white,
   },
+  selected:{
+    backgroundColor:COLORS.secondary,
+  },
+  selectedText:{
+    color:COLORS.white
+  },
   optionsContainer:{
     borderTopWidth:1,
     borderColor:COLORS.white

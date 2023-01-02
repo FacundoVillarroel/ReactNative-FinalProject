@@ -23,6 +23,7 @@ const statusSlice = createSlice({
 export const { updateSelectedStatus } = statusSlice.actions;
 
 export const selectStatus = (statusId) => {
+
   return async (dispatch) => {
     dispatch(updateSelectedStatus({statusId}))
   }

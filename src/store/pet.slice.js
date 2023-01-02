@@ -37,16 +37,18 @@ const petSlice = createSlice({
       state.pets.push({...newPet});
     },
     updateFilterPets: (state, action) => {
-      if (!action.payload.statusId){
-        const filteredPets = state.pets.filter(pet => pet.categoryId === action.payload.categoryId)
-        state.filteredPets = filteredPets
-      } else if (!action.payload.categoryId) {
-        const filteredPets = state.pets.filter(pet => pet.status === action.payload.statusId)
-        state.filteredPets = filteredPets
-      } else {
-        const filteredPets = state.pets.filter(pet => pet.categoryId === action.payload.categoryId && pet.status === action.payload.statusId)
-        state.filteredPets = filteredPets
+      const categoryId = action.payload.categoryId
+      const statusId = action.payload.statusId 
+      if (!statusId) {
+        state.filteredPets = state.pets.filter(pet => pet.categoryId === categoryId || categoryId === "all")
+        return
       }
+      if (!categoryId) {
+        state.filteredPets = state.pets.filter(pet => pet.status === statusId || statusId === "all") 
+        return
+      }
+      const filteredPets = state.pets.filter(pet => ((pet.categoryId === categoryId || categoryId === "all") && (pet.status === statusId || statusId === "all")))
+      state.filteredPets = filteredPets
     },
     updateSelectedPet: (state, action) => {
       const petFound = state.pets.find(pet => pet.id === action.payload.id)
