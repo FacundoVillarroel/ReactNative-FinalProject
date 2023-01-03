@@ -43,9 +43,10 @@ const authSlice = createSlice({
 export const { sign_up, sign_in, log_out } = authSlice.actions;
 
 
-export const signUp = (email, password) => {
+export const signUp = (email, password, setLoading) => {
   return async (dispatch) => {
     try {
+      setLoading(true)
       const response = await fetch(URL_AUTH_SIGN_UP, {
         method: 'POST',
         headers: {
@@ -64,15 +65,17 @@ export const signUp = (email, password) => {
         dispatch(saveUser({userId:data.localId, email}))
         dispatch(selectUser(data.localId))
       }
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-export const signIn = (email, password) => {
+export const signIn = (email, password, setLoading) => {
   return async (dispatch) => {
     try {
+      setLoading(true)
       const response = await fetch(URL_AUTH_SIGN_IN, {
         method: 'POST',
         headers: {
@@ -91,6 +94,7 @@ export const signIn = (email, password) => {
       if(!data.error){
         dispatch(selectUser(data.localId))
       }
+      setLoading(false)
     } catch (error) {
       console.log("Error:", error);
     }

@@ -10,5 +10,10 @@ export const styles = StyleSheet.create({
   flatList:{
     flex:1,
     backgroundColor:COLORS.background
-  }
+  },
+  activityContainer:{
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center",
+  },
 })

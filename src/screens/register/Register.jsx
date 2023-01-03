@@ -1,5 +1,5 @@
-import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image } from 'react-native';
-import React, { useReducer } from 'react';
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import React, { useReducer, useState } from 'react';
 import { isAndroid } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../store/auth.slice";
@@ -38,12 +38,17 @@ const formReducer = (state, action) => {
 }
 
 const Register = ({navigation}) => {
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
   const authError = useSelector(state => state.auth.error)
 
   const onHandleSubmit = () => {
-    dispatch(signUp(formState.email.value, formState.password.value));
+    if(formState.isFormValid){
+      dispatch(signUp(formState.email.value, formState.password.value, setLoading));
+    } else {
+      Alert.alert("Hay campos inválidos", "ingresa tu email y contraseña", [{text:"Ok"}])
+    }
   };
 
   const onHandleChangeInput = (value, type) => {
@@ -87,6 +92,7 @@ const Register = ({navigation}) => {
               />
             <TouchableOpacity style={styles.buttonContainer} onPress={onHandleSubmit}>
               <Text style={styles.buttonText}>Registrarme</Text>
+              {loading? <ActivityIndicator color={COLORS.details}/> : null}
             </TouchableOpacity>
           </View>
           <View style={styles.promptContainer}>

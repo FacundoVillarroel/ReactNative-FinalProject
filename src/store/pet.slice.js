@@ -81,7 +81,7 @@ export const savePet = (pet) => {
       const result = await response.json();
 
       dispatch(addPet({id:result.name, ...pet}))
-
+      
     } catch (err) {
       console.log(err);
     }
@@ -100,9 +100,10 @@ export const selectPet = (id) => {
   }
 }
 
-export const getPets = () => {
+export const getPets = (setLoading) => {
   return async (dispatch) => {
     try {
+      setLoading(true)
       const response = await fetch(`${URL_BASE}/pets.json`,{
         method:"GET",
         headers:{
@@ -117,6 +118,7 @@ export const getPets = () => {
       }))
 
       dispatch(updatePetsList({pets}))
+      setLoading(false)
     } catch (err) {
       console.log(err);
     }

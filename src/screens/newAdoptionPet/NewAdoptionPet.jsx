@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import React, { useReducer, useState } from 'react';
 import { Input, ImageSelector, Select, LocationSelector } from '../../components';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
@@ -50,6 +50,7 @@ const formReducer = (state, action) => {
 const NewFoundPet = ({ navigation }) => {
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer( formReducer, initialState)
+  const [loading, setLoading] = useState(false)
 
   const [appearanceToSelect, setAppearanceToSelect] = useState("");
   const currentUser = useSelector(state => state.user.currentUser);
@@ -60,6 +61,7 @@ const NewFoundPet = ({ navigation }) => {
   };
 
   const onHandleSubmit = async () => {
+    setLoading(true)
     if (formState.isFormValid) {
       let images = []
       for (let i = 0; i < formState.image.value.length; i++) {
@@ -83,8 +85,9 @@ const NewFoundPet = ({ navigation }) => {
         status:"adoption",
         authorId
       }
-      dispatch(savePet(pet)); 
-      Alert.alert("Publicado correctamente !", "encontrará el anuncio en la seccion de 'inico'",[{text:"Ok"}])
+      dispatch(savePet(pet))
+      setLoading(false); 
+      Alert.alert("Publicado correctamente !", "encontrará el anuncio en la seccion de 'inico'",[{text:"Ok"}]) 
       navigation.navigate("Post")
       navigation.navigate("Home")
     } else {
@@ -259,6 +262,14 @@ const NewFoundPet = ({ navigation }) => {
       <TouchableOpacity style={styles.publishBtnContainer} onPress={onHandleSubmit}>
         <Text style={styles.publishText}>Publicar</Text>
       </TouchableOpacity>
+      
+      {loading ?
+        <View style={styles.activityContainer}>
+          <Text style={styles.activityText}>Publicando..</Text>
+          <ActivityIndicator color={COLORS.details} size={50}/> 
+        </View> 
+      : null}
+      
     </View>
   )
 }

@@ -118,4 +118,14 @@ export const styles = StyleSheet.create({
     color:COLORS.danger,
     fontWeight:"600"
   },
+  activityContainer:{
+    flex:1,
+    position:"absolute",
+    left:"38%",
+    bottom:"50%",
+  },
+  activityText:{
+    fontFamily:"MartinMono-Bold",
+    paddingBottom:5,
+  },
 })
