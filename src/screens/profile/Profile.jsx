@@ -1,13 +1,21 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'; 
 import mipetLogo from "../../../assets/mipetLogo.png"
-
+import { logout } from '../../store/auth.slice';
+import { useDispatch } from 'react-redux';
+import { Modal } from '../../components';
 
 import { styles } from "./styles";
 import { COLORS } from '../../constants/colors';
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const [modalVisible, setModalVisible] = useState(false)
+
+  const onLogout = (isConfirmed) => {
+    isConfirmed ? dispatch(logout()) : setModalVisible(false)
+  }
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -24,7 +32,7 @@ const Profile = () => {
         <TouchableOpacity style={styles.option} onPress={null}>
           <Text style={styles.optionText}>Mis Anuncios</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.option} onPress={null}>
+        <TouchableOpacity style={styles.option} onPress={() => setModalVisible(true)}>
           <Text style={styles.optionText}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
@@ -33,6 +41,14 @@ const Profile = () => {
         <Text style={styles.logoName}>Mipet</Text>
         <Text style={styles.logoText}>Busca, Encuentra y/o adopta!. </Text>
       </View>
+      <Modal 
+        modalVisible={modalVisible} 
+        setModalVisible={setModalVisible} 
+        onPress={onLogout}
+        title={"¿Confirmar cierre de sesión?"}
+        option1={{icon:"checkmark", text:"Sí", action:true}}
+        option2={{icon:"close", text:"No", action:false}}
+      />
     </View>
   )
 }

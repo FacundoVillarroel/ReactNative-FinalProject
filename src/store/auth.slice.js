@@ -29,10 +29,14 @@ const authSlice = createSlice({
       state.userId = action.payload.userId
       state.error = error
     },
+    log_out: (state, action) => {
+      state.token = null;
+      state.userId = null;
+    }
   },
 });
 
-export const { sign_up, sign_in } = authSlice.actions;
+export const { sign_up, sign_in, log_out } = authSlice.actions;
 
 
 export const signUp = (email, password) => {
@@ -79,6 +83,16 @@ export const signIn = (email, password) => {
       dispatch(sign_in({token:data.idToken, userId:data.localId, error:data.error?.message}));
     } catch (error) {
       console.log("Error:", error);
+    }
+  }
+}
+
+export const logout = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(log_out({}))
+    } catch (error) {
+      console.log(error);
     }
   }
 }

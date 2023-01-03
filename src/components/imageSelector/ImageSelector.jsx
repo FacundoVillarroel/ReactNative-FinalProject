@@ -48,7 +48,14 @@ const ImageSelector = ({text, onImagePicked, style}) => {
       </View> ) : (
       <TouchableOpacity style={{...styles.container, ...style}} onPress={ () => setModalVisible(!modalVisible)}>
         <Text style={styles.text}> {text} </Text>
-        <Modal setModalVisible={setModalVisible} modalVisible={modalVisible}  onPress={onHandleImage}/>
+        <Modal 
+          setModalVisible={setModalVisible} 
+          modalVisible={modalVisible}  
+          onPress={onHandleImage}
+          title={"Elige una opción"}
+          option1={{icon:"camera", text:"Cámara", action:"camera"}}
+          option2={{icon:"image", text:"Galeria", action:"gallery"}}
+        />
       </TouchableOpacity> )
       }
     </>
