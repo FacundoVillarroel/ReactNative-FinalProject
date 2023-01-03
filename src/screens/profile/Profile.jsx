@@ -1,21 +1,26 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'; 
 import mipetLogo from "../../../assets/mipetLogo.png"
 import { logout } from '../../store/auth.slice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '../../components';
 
 import { styles } from "./styles";
 import { COLORS } from '../../constants/colors';
 
+
 const Profile = () => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false)
+  const currentUser = useSelector( state => state.user.currentUser)
+
+  const { email, name="Ingrese su nombre" , post = []} = currentUser
 
   const onLogout = (isConfirmed) => {
     isConfirmed ? dispatch(logout()) : setModalVisible(false)
   }
+  
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -24,8 +29,8 @@ const Profile = () => {
         </TouchableOpacity>
         <Ionicons name="md-person-circle-outline" size={100} color={COLORS.details}  style={styles.image}/>
         <View style ={styles.dataContainer}>
-          <Text style={styles.name}>Facundo Villarroel</Text>
-          <Text style={styles.email}>facu@gmail.com</Text>
+          <Text style={styles.email}>{email}</Text>
+          <Text style={styles.name}>{name}</Text>
         </View>
       </View>
       <View style={styles.optionsContainer}>

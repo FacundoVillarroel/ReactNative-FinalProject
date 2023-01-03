@@ -26,13 +26,13 @@ export const styles = StyleSheet.create({
     justifyContent:"space-evenly",
   },
   name:{
-    fontFamily:"MartinMono-Bold",
-    color:COLORS.dark,
-  },
-  email:{
     fontFamily:"MartinMono-Light",
     color:COLORS.dark,
     fontSize:13,
+  },
+  email:{
+    fontFamily:"MartinMono-Bold",
+    color:COLORS.dark,
   },
   optionsContainer:{
     flex:1
