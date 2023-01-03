@@ -8,7 +8,7 @@ import { uploadImage } from '../../utils';
 import { COLORS } from '../../constants/colors';
 import { styles } from "./styles";
 import { onInputChange, UPDATED_FORM } from '../../utils/form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { savePet } from '../../store/pet.slice';
 
 const initialState = {
@@ -54,6 +54,8 @@ const NewFoundPet = ({ navigation }) => {
 
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [appearanceToSelect, setAppearanceToSelect] = useState("");
+  const currentUser = useSelector(state => state.user.currentUser);
+  const authorId = currentUser.userId;
 
   const onHandleChangeInput = (value, name) => {
     onInputChange(name, value, dispatchFormState, formState)
@@ -81,7 +83,8 @@ const NewFoundPet = ({ navigation }) => {
         lossZone: formState.lossZone.value,
         description: formState.description.value,
         contact: formState.contact.value,
-        status:"found"
+        status:"found",
+        authorId
       }
       dispatch(savePet(pet));
       Alert.alert("Publicado correctamente !", "encontrará el anuncio en la seccion de 'inico'",[{text:"Ok"}])

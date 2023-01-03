@@ -6,6 +6,7 @@ import Pet from "../models/pet";
 const initialState = {
   pets: [],
   filteredPets:[],
+  filteredByAuthor: [],
   selected:null,
 }
 
@@ -32,7 +33,8 @@ const petSlice = createSlice({
         action.payload.lossZone,
         action.payload.description,
         action.payload.contact,
-        action.payload.status
+        action.payload.status,
+        action.payload.authorId
       )
       state.pets.push({...newPet});
     },
@@ -53,11 +55,15 @@ const petSlice = createSlice({
     updateSelectedPet: (state, action) => {
       const petFound = state.pets.find(pet => pet.id === action.payload.id)
       if (petFound){ state.selected = petFound} 
+    },
+    updateFilterByAuthor: (state, action) => {
+      const filteredPets = state.pets.filter(pet => pet.authorId === action.payload.userId)
+      state.filteredByAuthor = filteredPets
     }
   },
 });
 
-export const { addPet, updateFilterPets, updateSelectedPet, updatePetsList } = petSlice.actions;
+export const { addPet, updateFilterPets, updateSelectedPet, updatePetsList, updateFilterByAuthor } = petSlice.actions;
 
 export const savePet = (pet) => {
   return async (dispatch) => {
@@ -116,4 +122,11 @@ export const getPets = () => {
     }
   }
 }
+
+export const filterByAuthor = (userId) => {
+  return async (dispatch) => {
+    dispatch(updateFilterByAuthor({userId}))
+  }
+}
+
 export default petSlice.reducer;

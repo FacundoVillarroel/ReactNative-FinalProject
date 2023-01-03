@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
-import { Profile } from "../screens/";
+import { Profile, MyPosts } from "../screens/";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +16,14 @@ const ProfileNavigator = () => {
       <Stack.Screen
         name="Profile"
         component={Profile}
+      />
+      <Stack.Screen
+        name="MyPosts"
+        component={MyPosts}
+        options={{
+          headerShown:true,
+          title:"Mis Publicaciones"
+        }}
       />
     </Stack.Navigator>
   )

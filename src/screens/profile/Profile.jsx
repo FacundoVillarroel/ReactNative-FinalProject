@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons'; 
 import mipetLogo from "../../../assets/mipetLogo.png"
 import { logout } from '../../store/auth.slice';
@@ -10,12 +10,12 @@ import { styles } from "./styles";
 import { COLORS } from '../../constants/colors';
 
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false)
   const currentUser = useSelector( state => state.user.currentUser)
 
-  const { email, name="Ingrese su nombre" , post = []} = currentUser
+  const { email = "", name="Ingrese su nombre" } = currentUser
 
   const onLogout = (isConfirmed) => {
     isConfirmed ? dispatch(logout()) : setModalVisible(false)
@@ -34,7 +34,7 @@ const Profile = () => {
         </View>
       </View>
       <View style={styles.optionsContainer}>
-        <TouchableOpacity style={styles.option} onPress={null}>
+        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("MyPosts")}>
           <Text style={styles.optionText}>Mis Anuncios</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.option} onPress={() => setModalVisible(true)}>
