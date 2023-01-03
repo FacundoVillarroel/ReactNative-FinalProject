@@ -6,5 +6,66 @@ export const styles = StyleSheet.create({
   container:{
     flex:1,
     backgroundColor:COLORS.background
+  },
+  profileContainer:{
+    backgroundColor:COLORS.primary,
+    height:"35%",
+    flexDirection:"row",
+    alignItems:"center",
+  },
+  editContainer:{
+    position:"absolute",
+    top:20,
+    right:20,
+  },
+  image:{
+    paddingHorizontal:20,
+  },
+  dataContainer:{
+    height:"100%",
+    justifyContent:"space-evenly",
+  },
+  name:{
+    fontFamily:"MartinMono-Bold",
+    color:COLORS.dark,
+  },
+  email:{
+    fontFamily:"MartinMono-Light",
+    color:COLORS.dark,
+    fontSize:13,
+  },
+  optionsContainer:{
+    flex:1
+  },
+  option:{
+    paddingVertical:20,
+    marginHorizontal:20,
+    borderBottomWidth:1,
+    borderColor:COLORS.details
+  },
+  optionText:{
+    color:COLORS.dark,
+    fontFamily:"MartinMono-Regular"
+  },
+  logoContainer:{
+    width:"100%",
+    position:"absolute",
+    bottom:20,
+    alignItems:"center",
+    justifyContent:"center",
+  },
+  logo:{
+    height:100,
+    width:100,
+  },
+  logoName:{
+    paddingBottom:5,
+    fontFamily:"MartinMono-Regular",
+    color:COLORS.primary
+  },
+  logoText:{
+    fontFamily:"MartinMono-Regular",
+    fontSize:9,
+    color:COLORS.dark
   }
 })
