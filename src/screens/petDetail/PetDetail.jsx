@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
@@ -21,6 +21,10 @@ const PetDetail = ({navigation}) => {
   }
   const onClose = () => {
     return navigation.navigate("PetsList")
+  }
+
+  const onContact = () => {
+    Linking.openURL(`tel:${contact}`)
   }
 
   return (
@@ -50,7 +54,9 @@ const PetDetail = ({navigation}) => {
           <MapPreview location={lossZone.coords}/>
         </View>
       </View>
-      <Text style={styles.contact}>Contacto: {contact}</Text>
+      <TouchableOpacity style={styles.contactConainer} onPress={onContact}>
+        <Text style={styles.contact}>Contacto: {contact}</Text>
+      </TouchableOpacity>
     </ScrollView>
   )
 }

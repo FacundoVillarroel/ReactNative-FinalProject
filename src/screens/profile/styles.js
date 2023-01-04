@@ -9,7 +9,9 @@ export const styles = StyleSheet.create({
   },
   profileContainer:{
     backgroundColor:COLORS.primary,
-    height:"35%",
+    flex:.5,
+  },
+  profileDataContainer:{
     flexDirection:"row",
     alignItems:"center",
   },
@@ -22,17 +24,19 @@ export const styles = StyleSheet.create({
     paddingHorizontal:20,
   },
   dataContainer:{
-    height:"100%",
+    height:"80%",
     justifyContent:"space-evenly",
   },
   name:{
-    fontFamily:"MartinMono-Light",
-    color:COLORS.dark,
-    fontSize:13,
-  },
-  email:{
     fontFamily:"MartinMono-Bold",
     color:COLORS.dark,
+    fontSize:14,
+  },
+  email:{
+    fontFamily:"MartinMono-Light",
+    color:COLORS.dark,
+    fontSize:11,
+    alignSelf:"center",
   },
   optionsContainer:{
     flex:1

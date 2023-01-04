@@ -24,14 +24,16 @@ const Profile = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
-        <TouchableOpacity style={styles.editContainer}>
-          <Ionicons name="ios-pencil" size={24} color={COLORS.details} />
-        </TouchableOpacity>
-        <Ionicons name="md-person-circle-outline" size={100} color={COLORS.details}  style={styles.image}/>
-        <View style ={styles.dataContainer}>
-          <Text style={styles.email}>{email}</Text>
-          <Text style={styles.name}>{name}</Text>
+        <View style={styles.profileDataContainer}>
+          <TouchableOpacity style={styles.editContainer}>
+            <Ionicons name="ios-pencil" size={24} color={COLORS.details} />
+          </TouchableOpacity>
+          <Ionicons name="md-person-circle-outline" size={100} color={COLORS.details}  style={styles.image}/>
+          <View style ={styles.dataContainer}>
+            <Text style={styles.name}>{name}</Text>
+          </View>
         </View>
+        <Text style={styles.email}>{email}</Text>
       </View>
       <View style={styles.optionsContainer}>
         <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("MyPosts")}>
