@@ -10,11 +10,7 @@ export const styles = StyleSheet.create({
     borderRadius:5,
   },
   image:{
-    width:100,
-    height:100,
+    width:"100%",
+    height:"100%",
   },
-  text:{
-    fontFamily:"MartinMono-Light",
-    fontSize:25,
-  }
 })

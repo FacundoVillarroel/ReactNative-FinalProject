@@ -1,12 +1,12 @@
 import { TouchableOpacity, Text, View, Image } from 'react-native';
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import * as ImagePicker from "expo-image-picker";
 import Modal from '../modal/Modal';
-import { verifyPermissionsCamera, verifyPermissionsMediaLibrary, uploadImage } from '../../utils';
+import { verifyPermissionsCamera, verifyPermissionsMediaLibrary } from '../../utils';
 
 import { styles } from './styles';
 
-const ImageSelector = ({text, onImagePicked, style}) => {
+const ImageSelector = ({children, onImagePicked, style, imageStyle}) => {
   const [pickedUrl, setPickedUrl] = useState(null)
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -44,10 +44,10 @@ const ImageSelector = ({text, onImagePicked, style}) => {
     <>
     {pickedUrl ? (
       <View style={{...styles.container, ...style}}>
-        <Image style={styles.image} source={{uri: pickedUrl}}/>
+        <Image style={{...styles.image, ...imageStyle}} source={{uri: pickedUrl}}/>
       </View> ) : (
       <TouchableOpacity style={{...styles.container, ...style}} onPress={ () => setModalVisible(!modalVisible)}>
-        <Text style={styles.text}> {text} </Text>
+        {children}
         <Modal 
           setModalVisible={setModalVisible} 
           modalVisible={modalVisible}  

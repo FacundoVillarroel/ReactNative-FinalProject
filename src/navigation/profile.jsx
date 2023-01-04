@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
-import { Profile, MyPosts } from "../screens/";
+import { Profile, MyPosts, ModifyProfile } from "../screens/";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +25,14 @@ const ProfileNavigator = () => {
           title:"Mis Publicaciones"
         }}
       />
+        <Stack.Screen
+          name="ModifyProfile"
+          component={ModifyProfile}
+          options={{
+            headerShown:true,
+            title:"Editar Perfil"
+          }}
+        />
     </Stack.Navigator>
   )
 }

@@ -25,7 +25,7 @@ const Profile = ({navigation}) => {
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <View style={styles.profileDataContainer}>
-          <TouchableOpacity style={styles.editContainer}>
+          <TouchableOpacity style={styles.editContainer} onPress={() => navigation.navigate("ModifyProfile")}>
             <Ionicons name="ios-pencil" size={24} color={COLORS.details} />
           </TouchableOpacity>
           <Ionicons name="md-person-circle-outline" size={100} color={COLORS.details}  style={styles.image}/>

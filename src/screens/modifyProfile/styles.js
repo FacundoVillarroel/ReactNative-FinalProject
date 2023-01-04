@@ -1,0 +1,54 @@
+import { StyleSheet } from "react-native";
+import { COLORS } from "../../constants/colors";
+
+export const styles = StyleSheet.create({
+  container:{
+    flex:1,
+  },
+  imageContainer:{
+    height:150,
+    alignItems:"center",
+    justifyContent:"center",
+  },
+  imageSelector:{
+    borderRadius:100,
+    width:125,
+    height:125,
+    backgroundColor:COLORS.primary
+  },
+  image:{
+    borderRadius:100,
+    width:125,
+    height:125,
+  },
+  inputContainer:{
+    marginHorizontal:25
+  },
+  title:{
+    fontFamily:"MartinMono-Regular",
+    paddingVertical:10,
+  },
+  input:{
+    color:COLORS.black
+  },
+  btnConfirmContainer:{
+    position:"absolute",
+    bottom:25,
+    left:"12%",
+    backgroundColor:COLORS.primary,
+    padding:15,
+    borderRadius:10,
+  },
+  btnCancelContainer:{
+    position:"absolute",
+    bottom:25,
+    right:"12%",
+    backgroundColor:COLORS.primary,
+    padding:15,
+    borderRadius:10,
+  },
+  btnText:{
+    fontFamily:"MartinMono-Medium",
+    color:COLORS.white,
+  },
+})

@@ -131,9 +131,9 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Añade Fotos</Text>
           <View style={styles.photosContainer}>
-            <ImageSelector text={"+"} onImagePicked={onImagePicked}/>
-            <ImageSelector text={"+"} onImagePicked={onImagePicked}/>
-            <ImageSelector text={"+"} onImagePicked={onImagePicked}/>
+            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked}/>
+            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked}/>
+            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked}/>
           </View>
           <Text style={styles.photoDescription}>Las fotos deben describir el animal para ayudar a identificarlo</Text>
         </View>

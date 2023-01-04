@@ -23,6 +23,10 @@ export const styles = StyleSheet.create({
     fontFamily:"MartinMono-Light",
     fontSize:11,
   },
+  text:{
+    fontFamily:"MartinMono-Light",
+    fontSize:25,
+  },
   input:{
     color:COLORS.dark,
   },

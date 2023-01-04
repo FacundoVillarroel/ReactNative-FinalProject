@@ -12,7 +12,7 @@ export const validateInput = (name, value) => {
   switch (name) {
 
     case 'email':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'Email es requerido';
       } else if (!formatEmail.test(value)) {
@@ -25,10 +25,10 @@ export const validateInput = (name, value) => {
       break;
 
     case 'password':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'Contraseña es requerida';
-      } else if (value.length < minPasswordLength) {
+      } else if (value?.length < minPasswordLength) {
         hasError = true;
         error = `Contraseña debe tener al menos ${minPasswordLength} carácteres`;
       } else {
@@ -38,45 +38,45 @@ export const validateInput = (name, value) => {
       break;
 
     case 'name':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'El título es requerido';
-      } else if (value.length > maxTitleLength){
+      } else if (value?.length > maxTitleLength){
         hasError = true;
         error = `El título tiene un máximo de ${maxTitleLength} carácteres` 
       }
       break;
 
     case 'categoryId':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'Debes seleccionar un tipo de animal.'
       }
       break;
 
     case 'breed':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'Raza es requerida';
       }
       break;
 
     case'date':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'Fecha es requerida';
       }
       break;
 
     case 'description':
-      if (value.length > descriptionMaxLength){
+      if (value?.length > descriptionMaxLength){
         hasError = true;
         error = `La descripción no puede superar los ${descriptionMaxLength} carácteres`
       }
       break;
 
     case'contact':
-      if (value.trim() === '') {
+      if (value?.trim() === '') {
         hasError = true;
         error = 'Teléfono es requerido';
       } else if (!formatPhoneNumber.test(value)){
