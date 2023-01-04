@@ -1,10 +1,7 @@
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import React, { useReducer, useState } from 'react';
-import { isAndroid } from "../../utils";
-import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../store/auth.slice";
-import { UPDATED_FORM } from '../../utils/form';
-import { onInputChange } from '../../utils/form';
+import { isAndroid, resetPassword } from "../../utils";
+import { UPDATED_FORM, onInputChange } from '../../utils/form';
 import mipetLogo from "../../../assets/mipetLogo.png";
 
 import { Input } from '../../components';
@@ -13,7 +10,6 @@ import { COLORS } from '../../constants/colors';
 
 const initialState = {
   email:{value: "", error: "", touched:false, hasError:true },
-  password:{value: "", error: "", touched:false, hasError:true },
   isFormatValid:false,
 }
 
@@ -37,17 +33,15 @@ const formReducer = (state, action) => {
   }
 }
 
-const Login = ({navigation}) => {
+const ForgotPassword = ({navigation}) => {
   const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
-  const authError = useSelector(state => state.auth.error)
 
   const onHandleSubmit = () => {
     if(formState.isFormValid){
-      dispatch(signIn(formState.email.value, formState.password.value, setLoading));
+      resetPassword(formState.email.value, setLoading, navigation)
     } else {
-      Alert.alert("Hay campos inválidos", "ingresa tu email y contraseña", [{text:"Ok"}])
+      Alert.alert("El email ingresado no es válido","Verifica el email por favor.",[{text:"Ok."}])
     }
   };
 
@@ -65,6 +59,7 @@ const Login = ({navigation}) => {
             <Image source={mipetLogo} style={styles.logo}/>
             <Text style={styles.title}>Mipet</Text>
           </View>
+          <Text style={styles.subTitle}>¿Olvidó su contraseña?</Text>
           <View style={styles.inputsContainer}>
               <Input 
                 style={styles.textInput} 
@@ -74,24 +69,12 @@ const Login = ({navigation}) => {
                 placeholderTextColor={COLORS.light}
                 keyboardType="email-address"
                 value={formState.email.value}
-                hasError={formState.email.hasError || authError === "Email no registrado"}
-                error={formState.email.error || authError}
+                hasError={formState.email.hasError}
+                error={formState.email.error}
                 touched={formState.email.touched}
               />
-              <Input 
-                style={styles.textInput} 
-                iconName= "lock-closed"
-                onChangeText = { (text) => onHandleChangeInput(text, "password") }
-                placeholder="Ingrese su Contraseña"
-                placeholderTextColor={COLORS.light}
-                value={formState.password.value}
-                hasError={formState.password.hasError || authError === "Contraseña incorrecta"}
-                error={formState.password.error || authError}
-                touched={formState.password.touched}
-                type="password"
-              />
             <TouchableOpacity style={styles.buttonContainer} onPress={onHandleSubmit}>
-              <Text style={styles.buttonText}>Iniciar Sesión</Text>
+              <Text style={styles.buttonText}>Enviar link</Text>
               {loading? <ActivityIndicator color={COLORS.details}/> : null}
             </TouchableOpacity>
           </View>
@@ -100,13 +83,10 @@ const Login = ({navigation}) => {
             <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("Register")}>
               <Text style={styles.buttonText}>Ir al Registro!</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.forgotContainer} onPress={() => navigation.navigate("ForgotPassword")}>
-              <Text style={styles.forgotText}>Recuperar contraseña olvidada</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAvoidingView>
   )
 }
 
-export default Login
+export default ForgotPassword

@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { getUsersList } from '../store/user.slice';
 
-import { Register, Login } from '../screens';
+import { Register, Login, ForgotPassword } from '../screens';
 import { useDispatch } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
@@ -26,10 +26,13 @@ const Auth = () => {
       name='Login'
       component={Login}
       />
-
       <Stack.Screen
       name='Register'
       component={Register}
+      />
+      <Stack.Screen
+      name='ForgotPassword'
+      component={ForgotPassword}
       />
     </Stack.Navigator>
   )

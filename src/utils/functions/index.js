@@ -4,6 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 import { Alert } from 'react-native';
 import { firebase } from "../../constants/firebase/config";
+import { URL_RESET_PASSWORD } from '../../constants/firebase';
 
 export const isIOS = Platform.OS === 'ios';
 export const isAndroid = Platform.OS === 'android';
@@ -73,4 +74,32 @@ export const uploadImage = async (pickedUrl) => {
   }
 
   Alert.alert("Foto subida exitosamente !");
+}
+
+export const resetPassword = async ( email, setLoading, navigation) => {
+  try {
+    setLoading(true);
+    const response = await fetch(URL_RESET_PASSWORD, {
+      method:"POST",
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        requestType:"PASSWORD_RESET",
+        email
+      })
+    })
+
+    const data = await response.json();
+    setLoading(false);
+    if (data.error?.message === "EMAIL_NOT_FOUND"){
+      Alert.alert("Email inválido", "El email ingresado no se encuentra registrado", [{text:"Ok."}])
+    } else if (data.email){
+      Alert.alert("Email enviado correctamente", "Checkea tu bandeja de entrada o spam", [{text:"Ok."}])
+      navigation.navigate("Login")
+    }
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
 }
