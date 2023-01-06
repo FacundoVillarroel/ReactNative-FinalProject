@@ -21,7 +21,13 @@ export const styles = StyleSheet.create({
     right:20,
   },
   image:{
-    paddingHorizontal:20,
+    width:100,
+    height:100,
+    borderRadius:50,
+    marginHorizontal:22
+  },
+  profileIcon:{
+    paddingHorizontal:22,
   },
   dataContainer:{
     height:"80%",

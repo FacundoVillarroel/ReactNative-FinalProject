@@ -14,8 +14,15 @@ const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false)
   const currentUser = useSelector( state => state.user.currentUser)
+  let email = "";
+  let name = "Ingrese su nombre";
+  let profileImage = "";
 
-  const { email = "", name="Ingrese su nombre" } = currentUser
+  if (currentUser) {
+    email= currentUser .email;
+    name = currentUser.name || "Ingrese su nombre";
+    profileImage = currentUser.profileImage || "";
+  }
 
   const onLogout = (isConfirmed) => {
     isConfirmed ? dispatch(logout()) : setModalVisible(false)
@@ -28,7 +35,11 @@ const Profile = ({navigation}) => {
           <TouchableOpacity style={styles.editContainer} onPress={() => navigation.navigate("ModifyProfile")}>
             <Ionicons name="ios-pencil" size={24} color={COLORS.details} />
           </TouchableOpacity>
-          <Ionicons name="md-person-circle-outline" size={100} color={COLORS.details}  style={styles.image}/>
+          {profileImage 
+          ? <Image source={{uri:profileImage}} style={styles.image}/>
+          : <Ionicons name="md-person-circle-outline" size={100} color={COLORS.details}  style={styles.profileIcon}/>
+          }
+          
           <View style ={styles.dataContainer}>
             <Text style={styles.name}>{name}</Text>
           </View>

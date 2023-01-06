@@ -4,7 +4,17 @@ import { COLORS } from "../../constants/colors";
 export const styles = StyleSheet.create({
   container:{
     flex:1,
+    backgroundColor:COLORS.white,
   },
+  activityContainer:{
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center",    
+  },
+  activityText:{
+    fontFamily:"MartinMono-Regular",
+    paddingVertical:10,
+  }, 
   imageContainer:{
     height:150,
     alignItems:"center",

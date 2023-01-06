@@ -24,13 +24,19 @@ const userSlice = createSlice({
       state.users.push({...newUser})
     },
     updateCurrentUser: (state, action) => {
-      const userFound = state.users.find ( user => user.userId === action.payload.userId)
-      if (userFound) { state.currentUser = userFound}
+      const userFound = state.users.find ( user => user.userId === action.payload.userId);
+      if (userFound) { state.currentUser = userFound};
+    },
+    updateUsersData: (state, action) => {
+      let usersList = state.users.filter(user => user.userId !== action.payload.user.userId);
+      usersList.push(action.payload.user);
+      state.users = usersList;
+      state.currentUser = action.payload.user;
     }
   },
 });
 
-export const { updateUsersList, addUser, updateCurrentUser } = userSlice.actions;
+export const { updateUsersList, addUser, updateCurrentUser, updateUsersData } = userSlice.actions;
 
 export const saveUser = (user) => {
   return async (dispatch) => {
@@ -80,6 +86,27 @@ export const getUsersList = () => {
 export const selectUser = (userId) => {
   return (dispatch) => {
     dispatch(updateCurrentUser({userId}))
+  }
+}
+
+export const updateUserData = (updatedUser) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${URL_BASE}/users/${updatedUser.id}.json`,{
+        method:"PUT",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+          ...updatedUser
+        }),
+      })
+
+      const result = await response.json()
+      dispatch(updateUsersData({user:result}))
+    } catch (error) {
+      console.log("Error updateUserData", error);
+    }
   }
 }
 
