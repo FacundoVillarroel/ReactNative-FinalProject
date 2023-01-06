@@ -48,16 +48,17 @@ const formReducer = (state, action) => {
     }
 }
 
+
 const NewLostPet = ({ navigation }) => {
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer( formReducer, initialState)
   const [loading, setLoading] = useState(false)
-
+  
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [appearanceToSelect, setAppearanceToSelect] = useState("");
   const currentUser = useSelector(state => state.user.currentUser);
   const authorId = currentUser.userId;
-
+  
   const onHandleChangeInput = (value, name) => {
     onInputChange(name, value, dispatchFormState, formState)
   };
@@ -117,8 +118,8 @@ const NewLostPet = ({ navigation }) => {
     setAppearanceToSelect("")
   }
 
-  const onImagePicked = (uri) => {
-    onHandleChangeInput( uri, "image")
+  const onImagePicked = (image) => {
+    onHandleChangeInput( image, "image")
   }
 
   return (
@@ -131,9 +132,9 @@ const NewLostPet = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.inputTitle}>Añade Fotos</Text>
           <View style={styles.photosContainer}>
-            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked}/>
-            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked}/>
-            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked}/>
+            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked} index={0}/>
+            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked} index={1}/>
+            <ImageSelector children={<Text style={styles.text}> + </Text>} onImagePicked={onImagePicked} index={2}/>
           </View>
           <Text style={styles.photoDescription}>Las fotos deben describir el animal para ayudar a identificarlo</Text>
         </View>

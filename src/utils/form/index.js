@@ -107,7 +107,7 @@ export const onInputChange = (name, value, dispatch, formState) => {
   }
   if (name === "image") {
     currentValue = {...formState[name]}.value
-    currentValue.push(value)
+    currentValue[value.index] = value.uri
     value = currentValue
   }
 

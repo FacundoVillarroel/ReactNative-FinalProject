@@ -1,13 +1,13 @@
 import { TouchableOpacity, Text, View, Image } from 'react-native';
-import React, { Children, useState } from 'react';
+import React, { useState } from 'react';
 import * as ImagePicker from "expo-image-picker";
 import Modal from '../modal/Modal';
 import { verifyPermissionsCamera, verifyPermissionsMediaLibrary } from '../../utils';
 
 import { styles } from './styles';
 
-const ImageSelector = ({children, onImagePicked, style, imageStyle}) => {
-  const [pickedUrl, setPickedUrl] = useState(null)
+const ImageSelector = ({children, onImagePicked, style, imageStyle, image = null, index}) => {
+  const [pickedUrl, setPickedUrl] = useState(image)
   const [modalVisible, setModalVisible] = useState(false)
 
   const onHandleImage = async (option) => {
@@ -22,7 +22,7 @@ const ImageSelector = ({children, onImagePicked, style, imageStyle}) => {
         aspect: [4,4],
         quality:.8,
       })
-    } else {
+    } else if (option === "gallery") {
         const isCameraPermissions = await verifyPermissionsMediaLibrary();
         if (!isCameraPermissions) return
     
@@ -36,18 +36,16 @@ const ImageSelector = ({children, onImagePicked, style, imageStyle}) => {
 
     if (!result.canceled) {
       setPickedUrl(result.assets[0].uri)
-      onImagePicked(result.assets[0].uri)
+      onImagePicked({uri:result.assets[0].uri, index})
+      setModalVisible(false)
     }
   }
 
   return (
     <>
-    {pickedUrl ? (
-      <View style={{...styles.container, ...style}}>
-        <Image style={{...styles.image, ...imageStyle}} source={{uri: pickedUrl}}/>
-      </View> ) : (
-      <TouchableOpacity style={{...styles.container, ...style}} onPress={ () => setModalVisible(!modalVisible)}>
-        {children}
+    {
+      <TouchableOpacity style={{...styles.container, ...style}} onPress={() => setModalVisible(!modalVisible)}>
+        {pickedUrl ? <Image style={{...styles.image, ...imageStyle}} source={{uri: pickedUrl}}/> : children}
         <Modal 
           setModalVisible={setModalVisible} 
           modalVisible={modalVisible}  
@@ -56,7 +54,7 @@ const ImageSelector = ({children, onImagePicked, style, imageStyle}) => {
           option1={{icon:"camera", text:"Cámara", action:"camera"}}
           option2={{icon:"image", text:"Galeria", action:"gallery"}}
         />
-      </TouchableOpacity> )
+      </TouchableOpacity> 
       }
     </>
   )

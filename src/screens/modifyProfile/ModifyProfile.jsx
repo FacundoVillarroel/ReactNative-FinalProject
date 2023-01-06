@@ -12,7 +12,7 @@ import { uploadImage } from '../../utils';
 
 const initialState = {
   image:{value:[], error:"", touched:false, hasError: false},
-  name:{value:"", error:"", touched:false, hasError: true},
+  name:{value:null, error:"", touched:false, hasError: true},
   isFormValid:false
 }
 
@@ -46,12 +46,24 @@ const ModifyProfile = ({navigation}) => {
     onInputChange(name, value, dispatchFormState, formState)
   };
 
+  if (formState.name.value === null && user.name){
+    formState.name.value = user.name
+    formState.name.hasError = false
+  }
+
+  if (formState.image.value.length === 0 && user.profileImage) {
+    formState.image.value.push(user.profileImage)
+  }
+
   const onHandleSubmit = async () => {
     setLoading(true)
     if (formState.isFormValid){
 
       const imageUrlCache =formState.image.value[formState.image.value.length-1]
-      const imageUrl = await uploadImage(imageUrlCache)
+      let imageUrl = ""
+      if(imageUrlCache && imageUrlCache !== user.profileImage){
+        imageUrl = await uploadImage(imageUrlCache)
+      }
 
       const updatedUser = {
         ...user, 
@@ -68,9 +80,14 @@ const ModifyProfile = ({navigation}) => {
     setLoading(false)
   }
 
-  const onImagePicked = (uri) => {
-    onHandleChangeInput( uri, "image")
+  const onImagePicked = (image) => {
+    onHandleChangeInput( image, "image")
   };
+
+  const onCancel = () => {
+    navigation.navigate("Profile")
+    formState.image.value = []
+  }
 
   return (
     <>
@@ -90,6 +107,8 @@ const ModifyProfile = ({navigation}) => {
               onImagePicked={onImagePicked} 
               style={styles.imageSelector} 
               imageStyle={styles.image}
+              image={formState.image.value[formState.image.value.length-1]}
+              index={0}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -107,7 +126,7 @@ const ModifyProfile = ({navigation}) => {
           <TouchableOpacity style={styles.btnConfirmContainer} onPress={onHandleSubmit}>
             <Text style={styles.btnText}>Confirm</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnCancelContainer} onPress={() => navigation.navigate("Profile")}>
+          <TouchableOpacity style={styles.btnCancelContainer} onPress={onCancel}>
             <Text style={styles.btnText}>Cancel</Text>
           </TouchableOpacity>
         </View>
