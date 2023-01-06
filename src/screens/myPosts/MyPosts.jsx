@@ -21,7 +21,7 @@ const MyPosts = ({navigation}) => {
 
   const onSelectPet = (id) => {
     dispatch(selectPet(id))
-    navigation.navigate("PetDetail")
+    navigation.navigate("Home",{screen:"PetDetail"})
   }
 
   const renderItem = ( {item} ) => (

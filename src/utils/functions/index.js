@@ -25,15 +25,20 @@ export const getGeocoding = async (latitude, longitude) => {
 }
 
 export const verifyPermissionsGps = async () => {
-  const { status } = await Location.requestForegroundPermissionsAsync();
-  if ( status !== "granted") {
-    Alert.alert(
-      "Permisos insuficientes",
-      "Necesitas dar permisos para acceder a la ubicación", [{text:"Ok."}]
-    )
+  try {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if ( status !== "granted") {
+      Alert.alert(
+        "Permisos insuficientes para Publicar",
+        "Necesitas dar permisos para acceder a la ubicación", [{text:"Ok."}]
+      )
+      return false
+    }
+    return true
+  } catch (error) {
+    console.log(error);
     return false
   }
-  return true
 }
 
 export const verifyPermissionsMediaLibrary = async () => {

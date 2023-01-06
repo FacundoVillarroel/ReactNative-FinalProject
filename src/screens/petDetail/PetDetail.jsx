@@ -36,9 +36,9 @@ const PetDetail = ({navigation}) => {
     if (option === "cancel") setModalVisible(!modalVisible)
     if (option === "delete") {
       dispatch(deletePet(pet.id, user.userId, setLoading))
-      navigation.navigate("Profile")
       setModalVisible(false)
       Alert.alert("Publicación eliminada", "Tu publicación fue eliminada correctamente")
+      navigation.navigate("ProfileNavigator",{screen:"Profile"})
     }
   }
 

@@ -2,9 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { URL_AUTH_SIGN_UP, URL_AUTH_SIGN_IN } from "../constants/firebase";
 import { saveUser, selectUser } from "./user.slice";
 
+const userIdExample = "eaHAG8QucmhfSJJobh3YLMqWBNU2"
+
 const initialState = {
   token:null,
-  userId:null,
+  userId:userIdExample,
   email:null,
   error:null
 }

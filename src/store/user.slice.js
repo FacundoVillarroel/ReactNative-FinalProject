@@ -3,9 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import User from "../models/User";
 
+/*  user to try */
+const userExample = {
+  id:"/users/-NKuySlzvjN7-_V8MUyK",
+  email:"facu.villarroel@hotmail.com.ar",
+  name:"Facundo Villarroel",
+  profileImage:"https://firebasestorage.googleapis.com/v0/b/reactnative-finalproyect.appspot.com/o/95e2817c-6606-4709-9311-403bbb6bfb71.jpeg?alt=media&token=ebe4c064-1f8b-4947-a2fb-22a0d0644e6f",
+  userId:"eaHAG8QucmhfSJJobh3YLMqWBNU2"
+}
+
 const initialState = {
   users:[],
-  currentUser:null
+  currentUser:userExample
 }
 
 const userSlice = createSlice({
@@ -26,7 +35,6 @@ const userSlice = createSlice({
     updateCurrentUser: (state, action) => {
       const userFound = state.users.find ( user => user.userId === action.payload.userId);
       if (userFound) { state.currentUser = userFound};
-      console.log("UpdateCurrentUser", state.currentUser);
     },
     updateUsersData: (state, action) => {
       let usersList = state.users.filter(user => user.userId !== action.payload.user.userId);

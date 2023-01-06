@@ -12,32 +12,36 @@ const ImageSelector = ({children, onImagePicked, style, imageStyle, image = null
 
   const onHandleImage = async (option) => {
     let result = null
-    if ( option === "camera"){
-      const isCameraPermissions = await verifyPermissionsCamera();
-      if (!isCameraPermissions) return
-  
-      result = await ImagePicker.launchCameraAsync({
-        allowsEditing:true,
-        mediaTypes:ImagePicker.MediaTypeOptions.Images,
-        aspect: [4,4],
-        quality:.8,
-      })
-    } else if (option === "gallery") {
-        const isCameraPermissions = await verifyPermissionsMediaLibrary();
+    try {
+      if ( option === "camera"){
+        const isCameraPermissions = await verifyPermissionsCamera();
         if (!isCameraPermissions) return
     
-        result = await ImagePicker.launchImageLibraryAsync({
+        result = await ImagePicker.launchCameraAsync({
           allowsEditing:true,
           mediaTypes:ImagePicker.MediaTypeOptions.Images,
           aspect: [4,4],
           quality:.8,
         })
-      }
-
-    if (!result.canceled) {
-      setPickedUrl(result.assets[0].uri)
-      onImagePicked({uri:result.assets[0].uri, index})
-      setModalVisible(false)
+      } else if (option === "gallery") {
+          const isCameraPermissions = await verifyPermissionsMediaLibrary();
+          if (!isCameraPermissions) return
+      
+          result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing:true,
+            mediaTypes:ImagePicker.MediaTypeOptions.Images,
+            aspect: [4,4],
+            quality:.8,
+          })
+        }
+  
+      if (!result.canceled) {
+        setPickedUrl(result.assets[0].uri)
+        onImagePicked({uri:result.assets[0].uri, index})
+        setModalVisible(false)
+      }  
+    } catch (error) {
+      console.log(error);
     }
   }
 

@@ -15,7 +15,10 @@ const LocationSelector = ({ onLocationPicker, prevRoute}) => {
 
   const onHandleGetLocation = async () => {
     const isLocationPermission = await verifyPermissionsGps();
-    if (!isLocationPermission) return
+    if (!isLocationPermission) {
+      navigation.navigate("Post")
+      return
+    }
 
     const location = await Location.getCurrentPositionAsync({
       timeout:5000,
