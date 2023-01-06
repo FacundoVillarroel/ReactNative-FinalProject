@@ -46,12 +46,12 @@ const ModifyProfile = ({navigation}) => {
     onInputChange(name, value, dispatchFormState, formState)
   };
 
-  if (formState.name.value === null && user.name){
+  if (formState.name.value === null && user?.name){
     formState.name.value = user.name
     formState.name.hasError = false
   }
 
-  if (formState.image.value.length === 0 && user.profileImage) {
+  if (formState.image.value.length === 0 && user?.profileImage) {
     formState.image.value.push(user.profileImage)
   }
 

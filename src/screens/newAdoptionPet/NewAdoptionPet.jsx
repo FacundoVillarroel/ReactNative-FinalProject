@@ -16,7 +16,7 @@ const initialState = {
   name:{value: "", error: "", touched:false, hasError:true },
   categoryId:{value: "", error: "", touched:false, hasError:true },
   breed:{value: "", error: "", touched:false, hasError:true },
-  gender:{value: "", error: "", touched:false, hasError:true },
+  gender:{value: "", error: "", touched:false, hasError:false },
   hair:{value: "", error: "", touched:false, hasError:true },
   eyes:{value: "", error: "", touched:false, hasError:true },
   chip:{value: false, error: "", touched:false, hasError:false },
@@ -61,8 +61,8 @@ const NewFoundPet = ({ navigation }) => {
   };
 
   const onHandleSubmit = async () => {
-    setLoading(true)
     if (formState.isFormValid) {
+      setLoading(true)
       let images = []
       for (let i = 0; i < formState.image.value.length; i++) {
         const imageUrl = formState.image.value[i];

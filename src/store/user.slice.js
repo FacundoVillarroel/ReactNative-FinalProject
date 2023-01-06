@@ -26,6 +26,7 @@ const userSlice = createSlice({
     updateCurrentUser: (state, action) => {
       const userFound = state.users.find ( user => user.userId === action.payload.userId);
       if (userFound) { state.currentUser = userFound};
+      console.log("UpdateCurrentUser", state.currentUser);
     },
     updateUsersData: (state, action) => {
       let usersList = state.users.filter(user => user.userId !== action.payload.user.userId);

@@ -11,11 +11,11 @@ export const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:COLORS.white,
     borderRadius:50,
-    height:30,
-    width:30,
+    height:35,
+    width:35,
     alignItems:"center",
     justifyContent:"center",
-    opacity:0.4,
+    opacity:0.5,
     backgroundColor:COLORS.dark
   },
   text:{

@@ -5,12 +5,12 @@ import { formatDate } from '../../utils';
 
 import { styles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterByAuthor } from '../../store/pet.slice';
+import { filterByAuthor, selectPet } from '../../store/pet.slice';
 
 
-const MyPosts = () => {
-  const user = useSelector(state => state.user.currentUser);
-  const { userId= ""} = user;
+const MyPosts = ({navigation}) => {
+  const user = useSelector(state => state.user.currentUser) || {};
+  const { userId } = user || {};
   const posts = useSelector(state => state.pet.filteredByAuthor);
   const dispatch = useDispatch();
 
@@ -19,8 +19,9 @@ const MyPosts = () => {
   }, [filterByAuthor])
   
 
-  const onSelectPet = () => {
-    null
+  const onSelectPet = (id) => {
+    dispatch(selectPet(id))
+    navigation.navigate("PetDetail")
   }
 
   const renderItem = ( {item} ) => (

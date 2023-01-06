@@ -7,8 +7,16 @@ export const styles = StyleSheet.create({
     flex:1,
     backgroundColor:COLORS.background,
   },
+  activityContainer:{
+    flex:1,
+    alignItems:"center",
+    justifyContent:"center",
+  },
   imageContainer:{
     flex:1,
+  },
+  btnDelete:{
+    left:"88%",
   },
   status:{
     position:"absolute",

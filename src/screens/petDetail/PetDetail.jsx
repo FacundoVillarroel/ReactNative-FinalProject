@@ -1,14 +1,19 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Linking } from 'react-native';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { View, Text, Image, ScrollView, TouchableOpacity, Linking, ActivityIndicator, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
 
-import { PetDetailItem, ButtonClose, MapPreview } from '../../components';
+import { PetDetailItem, ButtonClose, MapPreview, Modal } from '../../components';
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
+import { deletePet } from '../../store/pet.slice';
 
 const PetDetail = ({navigation}) => {
-  const pet = useSelector((state) => state.pet.selected)
+  const dispatch = useDispatch();
+  const pet = useSelector((state) => state.pet.selected);
+  const user = useSelector(state => state.user.currentUser);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet
 
@@ -27,10 +32,37 @@ const PetDetail = ({navigation}) => {
     Linking.openURL(`tel:${contact}`)
   }
 
+  const onHandleDelete = (option) => {
+    if (option === "cancel") setModalVisible(!modalVisible)
+    if (option === "delete") {
+      dispatch(deletePet(pet.id, user.userId, setLoading))
+      navigation.navigate("Profile")
+      setModalVisible(false)
+      Alert.alert("Publicación eliminada", "Tu publicación fue eliminada correctamente")
+    }
+  }
+
+  if(loading) {
+    return(
+      <View style={styles.activityContainer}> 
+        <ActivityIndicator size={50} color={COLORS.primary}/> 
+      </View> 
+    )
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <ButtonClose onPress={onClose}/>
+        {pet.authorId === user?.userId ? <ButtonClose onPress={() => setModalVisible(!modalVisible)} style={styles.btnDelete} isDeleteAllowed={true}/> : null}
+          <Modal 
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            onPress={onHandleDelete}
+            title="¿Seguro desea eliminar esta publicación?"
+            option1={{text:"Eliminar.",action:"delete",icon:"trash"}}
+            option2={{text:"Cancelar.",action:"cancel",icon:"close"}}
+          />
         <Text style={{...styles.status, color:color}}>{statusText}</Text>
         <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch" />
       </View>

@@ -13,16 +13,8 @@ import { COLORS } from '../../constants/colors';
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false)
-  const currentUser = useSelector( state => state.user.currentUser)
-  let email = "";
-  let name = "Ingrese su nombre";
-  let profileImage = "";
-
-  if (currentUser) {
-    email= currentUser .email;
-    name = currentUser.name || "Ingrese su nombre";
-    profileImage = currentUser.profileImage || "";
-  }
+  const currentUser = useSelector( state => state.user.currentUser) || {}
+  const {email,name = "Ingrese su nombre", profileImage= "" } = currentUser
 
   const onLogout = (isConfirmed) => {
     isConfirmed ? dispatch(logout()) : setModalVisible(false)

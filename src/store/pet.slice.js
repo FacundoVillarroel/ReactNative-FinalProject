@@ -100,7 +100,7 @@ export const selectPet = (id) => {
   }
 }
 
-export const getPets = (setLoading) => {
+export const getPets = (setLoading = () => null) => {
   return async (dispatch) => {
     try {
       setLoading(true)
@@ -128,6 +128,25 @@ export const getPets = (setLoading) => {
 export const filterByAuthor = (userId) => {
   return async (dispatch) => {
     dispatch(updateFilterByAuthor({userId}))
+  }
+}
+
+export const deletePet = (id, userId, setLoading) => {
+  return async (dispatch) => {
+    try {
+      setLoading(true)
+      await fetch(`${URL_BASE}/pets/${id}.json`,{
+        method:"DELETE",
+        headers:{
+          "Content-Type":"application/json"
+        }
+      })
+      dispatch(getPets())
+      dispatch(filterByAuthor(userId))
+      setLoading (false)
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
