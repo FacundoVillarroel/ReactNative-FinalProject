@@ -3,18 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import User from "../models/User";
 
-/*  user to try */
+/* insert this user in initialState CurrentUser to login with an existing account */
 const userExample = {
-  id:"/users/-NKuySlzvjN7-_V8MUyK",
-  email:"facu.villarroel@hotmail.com.ar",
-  name:"Facundo Villarroel",
-  profileImage:"https://firebasestorage.googleapis.com/v0/b/reactnative-finalproyect.appspot.com/o/95e2817c-6606-4709-9311-403bbb6bfb71.jpeg?alt=media&token=ebe4c064-1f8b-4947-a2fb-22a0d0644e6f",
-  userId:"eaHAG8QucmhfSJJobh3YLMqWBNU2"
+  id:"/users/-NKtCkzAT3EMBFeDjUGe",
+  email:"test@gmail.com",
+  name:"Test User",
+  profileImage:"https://firebasestorage.googleapis.com/v0/b/reactnative-finalproyect.appspot.com/o/d1ef55ff-ba24-49b0-8faf-0a9437136422.jpeg?alt=media&token=d6559c89-c71e-42ae-bba8-08672a5f63b4",
+  userId:"xnkvmARAFxffFgzg1NxuC0fU5VI3"
 }
 
 const initialState = {
   users:[],
-  currentUser:userExample
+  currentUser:null
 }
 
 const userSlice = createSlice({

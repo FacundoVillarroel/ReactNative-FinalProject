@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { URL_AUTH_SIGN_UP, URL_AUTH_SIGN_IN } from "../constants/firebase";
 import { saveUser, selectUser } from "./user.slice";
 
-const userIdExample = "eaHAG8QucmhfSJJobh3YLMqWBNU2"
+const userIdExample = "xnkvmARAFxffFgzg1NxuC0fU5VI3" // insert in initial state this userId to enter with an existing account
 
 const initialState = {
   token:null,
-  userId:userIdExample,
+  userId:null,
   email:null,
   error:null
 }

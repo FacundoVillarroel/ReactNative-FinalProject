@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
 
-import { PetDetailItem, ButtonClose, MapPreview, Modal } from '../../components';
+import { PetDetailItem, ButtonClose, MapPreview, Modal, Carousel } from '../../components';
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 import { deletePet } from '../../store/pet.slice';
@@ -64,7 +64,8 @@ const PetDetail = ({navigation}) => {
             option2={{text:"Cancelar.",action:"cancel",icon:"close"}}
           />
         <Text style={{...styles.status, color:color}}>{statusText}</Text>
-        <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch" />
+        <Carousel images={image}/>
+        {/* <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch" /> */}
       </View>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.descriptionText}>{description}</Text>
