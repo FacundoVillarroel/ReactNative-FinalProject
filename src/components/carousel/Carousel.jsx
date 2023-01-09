@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import React, { useRef, useState } from 'react';
 
 import { styles } from './styles';

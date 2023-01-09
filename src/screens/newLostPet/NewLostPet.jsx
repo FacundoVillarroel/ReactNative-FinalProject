@@ -159,7 +159,7 @@ const NewLostPet = ({ navigation }) => {
           <Select 
             value={formState.categoryId.value} 
             placeHolder="Seleccione el tipo de mascota" 
-            options={CATEGORIES} 
+            options={CATEGORIES.filter(category => category.id !== "all")} 
             onChange={onHandleChangeInput} 
             onChangeName="categoryId"
           />
