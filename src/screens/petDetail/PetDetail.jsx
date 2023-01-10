@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, TouchableOpacity, Linking, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Linking, ActivityIndicator, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
@@ -7,6 +7,7 @@ import { PetDetailItem, ButtonClose, MapPreview, Modal, Carousel } from '../../c
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 import { deletePet } from '../../store/pet.slice';
+import { deleteImage } from '../../utils';
 
 const PetDetail = ({navigation}) => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const PetDetail = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false)
 
-  const { image, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet
+  const { image: images, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet
 
   const color = status === "lost" ? COLORS.danger : status === "found" ? COLORS.success : COLORS.light 
   let statusText = "En adopción"
@@ -32,10 +33,18 @@ const PetDetail = ({navigation}) => {
     Linking.openURL(`tel:${contact}`)
   }
 
-  const onHandleDelete = (option) => {
+  const onHandleDelete = async (option) => {
     if (option === "cancel") setModalVisible(!modalVisible)
     if (option === "delete") {
       dispatch(deletePet(pet.id, user.userId, setLoading))
+
+      //delete image from storage in firebase
+      images.forEach(image => {
+        const startIndex = image.lastIndexOf("/")+1
+        const endIndex = image.lastIndexOf("?")
+        const imageName = (image.substring(startIndex,endIndex))
+        deleteImage(imageName)
+      });
       setModalVisible(false)
       Alert.alert("Publicación eliminada", "Tu publicación fue eliminada correctamente")
       navigation.navigate("ProfileNavigator",{screen:"Profile"})
@@ -64,8 +73,7 @@ const PetDetail = ({navigation}) => {
             option2={{text:"Cancelar.",action:"cancel",icon:"close"}}
           />
         <Text style={{...styles.status, color:color}}>{statusText}</Text>
-        <Carousel images={image}/>
-        {/* <Image style={styles.image} source={{uri:image[0]}} resizeMode="stretch" /> */}
+        <Carousel images={images}/>
       </View>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.descriptionText}>{description}</Text>

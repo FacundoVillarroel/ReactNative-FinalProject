@@ -73,12 +73,23 @@ export const uploadImage = async (pickedUrl) => {
   try {
     await ref;
     let url = await firebase.storage().ref(fileName).getDownloadURL()
+    console.log("Url",url);
+    console.log("FileName:",fileName);
     return url
   } catch (err) {
     console.log(err);
   }
 
   Alert.alert("Foto subida exitosamente !");
+}
+
+export const deleteImage = async (imageName) => {
+  try {
+    let ref = await firebase.storage().ref(imageName)
+    await ref.delete()
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const resetPassword = async ( email, setLoading, navigation) => {
