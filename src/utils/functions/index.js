@@ -67,15 +67,13 @@ export const verifyPermissionsCamera = async () => {
 
 export const uploadImage = async (pickedUrl) => {
   const response = await fetch(pickedUrl);
-  const blob = await response.blob()
+  const blob = await response.blob();
   const fileName = pickedUrl.substring(pickedUrl.lastIndexOf("/")+1);
   let ref = firebase.storage().ref().child(fileName).put(blob);
   try {
     await ref;
-    let url = await firebase.storage().ref(fileName).getDownloadURL()
-    console.log("Url",url);
-    console.log("FileName:",fileName);
-    return url
+    let url = await firebase.storage().ref(fileName).getDownloadURL();
+    return url;
   } catch (err) {
     console.log(err);
   }

@@ -1,4 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, Linking, ActivityIndicator, Alert } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
@@ -38,7 +39,7 @@ const PetDetail = ({navigation}) => {
     if (option === "delete") {
       dispatch(deletePet(pet.id, user.userId, setLoading))
 
-      //delete image from storage in firebase
+      //Delete image from storage in firebase
       images.forEach(image => {
         const startIndex = image.lastIndexOf("/")+1
         const endIndex = image.lastIndexOf("?")
@@ -48,6 +49,18 @@ const PetDetail = ({navigation}) => {
       setModalVisible(false)
       Alert.alert("Publicación eliminada", "Tu publicación fue eliminada correctamente")
       navigation.navigate("ProfileNavigator",{screen:"Profile"})
+      // Reset Stack Navigator
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Home' },
+            {
+              name: 'ProfileNavigator',
+            },
+          ],
+        })
+      )
     }
   }
 
