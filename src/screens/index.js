@@ -11,3 +11,4 @@ export { default as Maps } from "./maps/Maps";
 export { default as MyPosts } from "./myPosts/MyPosts";
 export { default as ForgotPassword } from "./forgotPassword/ForgotPassword";
 export { default as ModifyProfile } from "./modifyProfile/ModifyProfile";
+export { default as FullScreenImage } from "./fullScreenImage/FullScreenImage";

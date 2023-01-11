@@ -2,11 +2,13 @@ import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import React, { useRef, useState } from 'react';
 
 import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 const ViewConfigRef = { viewAreaCoveragePercentThreshold:95 }
 
 const Carousel = ({images}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigation = useNavigation();
   
   let flatListRef = useRef();
   const onViewRef = useRef(({changed}) => {
@@ -20,9 +22,9 @@ const Carousel = ({images}) => {
   }
 
   const renderItem = ({item}) => (
-    <View>
+    <TouchableOpacity onPress={() => navigation.navigate("FullScreenImage",{image:item})}>
       <Image source={{uri:item}} style={styles.image}/>
-    </View>
+    </TouchableOpacity>
   )
 
   return (
