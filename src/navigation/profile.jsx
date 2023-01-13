@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import { COLORS } from "../constants/colors";
 
 import { Profile, MyPosts, ModifyProfile } from "../screens/";
 
@@ -22,6 +23,9 @@ const ProfileNavigator = () => {
         component={MyPosts}
         options={{
           headerShown:true,
+          headerStyle:{
+            backgroundColor: COLORS.primary,
+          },
           title:"Mis Publicaciones"
         }}
       />

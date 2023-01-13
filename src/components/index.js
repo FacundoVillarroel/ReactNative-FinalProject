@@ -12,3 +12,4 @@ export { default as LocationSelector } from "./locationSelector/LocationSelector
 export { default as MapPreview } from "./mapPreview/MapPreview";
 export { default as NotFoundCard } from "./notFoundCard/NotFoundCard";
 export { default as Carousel } from "./carousel/Carousel";
+export { default as Header } from "./header/Header";

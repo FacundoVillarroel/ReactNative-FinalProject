@@ -5,7 +5,8 @@ import HomeNavigator from "./home";
 import PostNavigator from "./post";
 import ProfileNavigator from "./profile";
 import { COLORS } from "../constants/colors";
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons";
+import { Header } from "../components";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -40,6 +41,7 @@ const Tabs = () => {
         component={HomeNavigator}
         options={{
           title:"Inicio",
+          headerTitle: () => <Header title="Inicio" />,
           tabBarIcon:({ focused }) => (
             <Ionicons name={focused ? "home" : "home-outline"} size={25} color={COLORS.white}/>
           )
@@ -49,6 +51,7 @@ const Tabs = () => {
         name="PostNavigator"
         component={PostNavigator}
         options={{
+          headerTitle: () => <Header title="Anunciar" />,
           title:"Anunciar",
           tabBarIcon:({ focused }) => (
             <Ionicons name={focused ? "add-circle" : "add-circle-outline"} size={30} color={COLORS.white}/>
@@ -60,6 +63,7 @@ const Tabs = () => {
         component={ProfileNavigator}
         options={{
           title:"Perfil",
+          headerTitle: () => <Header title="Perfil" />,
           tabBarIcon:({ focused }) => (
             <Ionicons name={focused ? "ios-person" : "ios-person-outline"} size={25} color={COLORS.white}/>
           )
