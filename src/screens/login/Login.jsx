@@ -2,7 +2,7 @@ import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image, ActivityIndi
 import React, { useReducer, useState } from 'react';
 import { isAndroid } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../store/auth.slice";
+import { resetAuthError, signIn } from "../../store/auth.slice";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
 import mipetLogo from "../../../assets/mipetLogo.png";
@@ -55,6 +55,11 @@ const Login = ({navigation}) => {
     onInputChange(type, value, dispatchFormState, formState);
   };
 
+  const manageFocus = ( onFocus ) => {
+    if (authError && onFocus)
+    dispatch(resetAuthError())
+  }
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboardContainer}
@@ -77,6 +82,8 @@ const Login = ({navigation}) => {
                 hasError={formState.email.hasError || authError === "Email no registrado"}
                 error={formState.email.error || authError}
                 touched={formState.email.touched}
+                onFocus={() => manageFocus(true)}
+                onBlur={() => manageFocus(false)}
               />
               <Input 
                 style={styles.textInput} 
@@ -89,6 +96,8 @@ const Login = ({navigation}) => {
                 error={formState.password.error || authError}
                 touched={formState.password.touched}
                 type="password"
+                onFocus={() => manageFocus(true)}
+                onBlur={() => manageFocus(false)}
               />
             <TouchableOpacity style={styles.buttonContainer} onPress={onHandleSubmit}>
               <Text style={styles.buttonText}>Iniciar Sesión</Text>

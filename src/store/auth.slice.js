@@ -38,11 +38,14 @@ const authSlice = createSlice({
       state.email = null;
       state.token = null;
       state.userId = null;
+    },
+    updateAuthError:(state, action) => {
+      state.error = null
     }
   },
 });
 
-export const { sign_up, sign_in, log_out } = authSlice.actions;
+export const { sign_up, sign_in, log_out, updateAuthError } = authSlice.actions;
 
 
 export const signUp = (email, password, setLoading) => {
@@ -110,6 +113,12 @@ export const logout = () => {
     } catch (error) {
       console.log(error);
     }
+  }
+}
+
+export const resetAuthError = () => {
+  return (dispatch) => {
+    dispatch(updateAuthError({}));
   }
 }
 

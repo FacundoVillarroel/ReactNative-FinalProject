@@ -1,8 +1,8 @@
-import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, Image, ActivityIndicator, Alert } from 'react-native';
 import React, { useReducer, useState } from 'react';
 import { isAndroid } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "../../store/auth.slice";
+import { resetAuthError, signUp } from "../../store/auth.slice";
 import { UPDATED_FORM } from '../../utils/form';
 import { onInputChange } from '../../utils/form';
 import mipetLogo from "../../../assets/mipetLogo.png";
@@ -38,10 +38,10 @@ const formReducer = (state, action) => {
 }
 
 const Register = ({navigation}) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [formState, dispatchFormState] = useReducer(formReducer, initialState);
-  const authError = useSelector(state => state.auth.error)
+  const authError = useSelector(state => state.auth.error);
 
   const onHandleSubmit = () => {
     if(formState.isFormValid){
@@ -54,6 +54,11 @@ const Register = ({navigation}) => {
   const onHandleChangeInput = (value, type) => {
     onInputChange(type, value, dispatchFormState, formState);
   };
+
+  const manageFocus = ( onFocus ) => {
+    if (authError && onFocus)
+    dispatch(resetAuthError())
+  }
 
   return (
     <KeyboardAvoidingView
@@ -77,6 +82,8 @@ const Register = ({navigation}) => {
                 hasError={formState.email.hasError || authError}
                 error={formState.email.error || authError}
                 touched={formState.email.touched}
+                onFocus={() => manageFocus(true)}
+                onBlur={() => manageFocus(false)}
               />
               <Input 
                 style={styles.textInput} 
