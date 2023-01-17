@@ -1,10 +1,12 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import mipetLogo from "../../../assets/mipetLogoWhite.png";
+import { useNavigation } from '@react-navigation/native';
 
 import { styles } from './styles';
 
 const Header = ({title}) => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>
