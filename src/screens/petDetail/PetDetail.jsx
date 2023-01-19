@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity, Linking, ActivityIndicator, Alert } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
 
@@ -9,13 +9,16 @@ import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 import { deletePet } from '../../store/pet.slice';
 import { deleteImage } from '../../utils';
+import { loadFavorites, saveFavorite } from '../../store/favorites.slice';
 
 const PetDetail = ({navigation}) => {
   const dispatch = useDispatch();
   const pet = useSelector((state) => state.pet.selected);
+  const favPets = useSelector((state) => state.favorites.favoritesList)
   const user = useSelector(state => state.user.currentUser);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false)
+  const [fav, setFav] = useState(false)
 
   const { image: images, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet
 
@@ -64,6 +67,21 @@ const PetDetail = ({navigation}) => {
     }
   }
 
+  const onFav = async () => {
+    dispatch(saveFavorite(pet))
+    setFav(!fav)
+  }
+
+  const isFavPet = () => {
+    let favPetsId = favPets.map(item => item?.id)
+    return favPetsId.includes(pet.id)
+  }
+
+  useEffect(() => {
+    dispatch(loadFavorites(setLoading));
+    setFav(isFavPet());
+  },[dispatch])
+
   if(loading) {
     return(
       <View style={styles.activityContainer}> 
@@ -76,7 +94,9 @@ const PetDetail = ({navigation}) => {
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <ButtonClose onPress={onClose}/>
-        {pet.authorId === user?.userId ? <ButtonClose onPress={() => setModalVisible(!modalVisible)} style={styles.btnDelete} isDeleteAllowed={true}/> : null}
+        {pet.authorId === user?.userId 
+          ? <ButtonClose onPress={() => setModalVisible(!modalVisible)} style={styles.btnRight} type={"delete"}/> 
+          : <ButtonClose onPress={onFav} style={styles.btnRight} type={"fav"} fav={fav}/>}
           <Modal 
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}

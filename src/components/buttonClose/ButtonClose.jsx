@@ -5,14 +5,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 
-const ButtonClose = ({onPress, style, isDeleteAllowed}) => {
+const ButtonClose = ({onPress, style, type, fav}) => {
   return (
     <TouchableOpacity style={{...styles.container, ...style}} onPress={onPress}>
-      {isDeleteAllowed 
+      {type === "delete"
         ? <Ionicons name="trash" size={20} color={COLORS.danger}/>
-        : <Text style={styles.text}>X</Text>
+        : type === "fav" 
+          ? <Ionicons name={fav ? "heart" : "heart-outline"} size={20} color={COLORS.danger}/>
+          :<Text style={styles.text}>X</Text>
       }
-      
     </TouchableOpacity>
   )
 }

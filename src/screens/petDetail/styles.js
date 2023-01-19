@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   imageContainer:{
     flex:1,
   },
-  btnDelete:{
+  btnRight:{
     left:"88%",
   },
   status:{

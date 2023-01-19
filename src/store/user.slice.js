@@ -14,7 +14,7 @@ const userExample = {
 
 const initialState = {
   users:[],
-  currentUser:null
+  currentUser:userExample
 }
 
 const userSlice = createSlice({

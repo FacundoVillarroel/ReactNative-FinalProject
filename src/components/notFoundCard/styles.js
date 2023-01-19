@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
   subMessage:{
     fontFamily:"MartinMono-Regular",
     fontSize:12,
-    marginVertical:30
+    marginVertical:30,
+    marginHorizontal:10,
   }
 })

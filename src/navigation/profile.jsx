@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { COLORS } from "../constants/colors";
 
-import { Profile, MyPosts, ModifyProfile } from "../screens/";
+import { Profile, MyPosts, ModifyProfile, FavPosts } from "../screens/";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +27,17 @@ const ProfileNavigator = () => {
             backgroundColor: COLORS.primary,
           },
           title:"Mis Publicaciones"
+        }}
+      />
+      <Stack.Screen
+        name="FavPosts"
+        component={FavPosts}
+        options={{
+          headerShown:true,
+          headerStyle:{
+            backgroundColor: COLORS.primary,
+          },
+          title:"Anuncios Guardados"
         }}
       />
         <Stack.Screen

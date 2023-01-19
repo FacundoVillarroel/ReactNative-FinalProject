@@ -42,6 +42,9 @@ const Profile = ({navigation}) => {
         <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("MyPosts")}>
           <Text style={styles.optionText}>Mis Anuncios</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.option} onPress={() => navigation.navigate("FavPosts")}>
+          <Text style={styles.optionText}>Anuncios Guardados</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.option} onPress={() => setModalVisible(true)}>
           <Text style={styles.optionText}>Cerrar Sesión</Text>
         </TouchableOpacity>

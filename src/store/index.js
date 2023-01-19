@@ -5,6 +5,7 @@ import categoryReducer from "./category.slice";
 import authReducer from "./auth.slice";
 import statusReducer from "./status.slice";
 import userReducer from "./user.slice";
+import favoritesReducer from "./favorites.slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     category:categoryReducer,
     pet:petReducer,
     status:statusReducer,
+    favorites:favoritesReducer,
     user:userReducer,
   },
   middleware: (getDefaultMiddleware) =>

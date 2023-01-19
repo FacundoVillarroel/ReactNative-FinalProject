@@ -12,3 +12,4 @@ export { default as MyPosts } from "./myPosts/MyPosts";
 export { default as ForgotPassword } from "./forgotPassword/ForgotPassword";
 export { default as ModifyProfile } from "./modifyProfile/ModifyProfile";
 export { default as FullScreenImage } from "./fullScreenImage/FullScreenImage";
+export { default as FavPosts } from "./favPosts/FavPosts";
