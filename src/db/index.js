@@ -6,7 +6,7 @@ export const init = () => {
   const promise = new Promise((resolve,reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY NOT NULL, pet TEXT NOT NULL);',
+        'CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, pet TEXT NOT NULL);',
         [],
         () => resolve(),
         (_,err) => reject(err)
@@ -16,12 +16,12 @@ export const init = () => {
   return promise;
 }
 
-export const insertFavPet = (pet) => {
+export const insertFavPet = (pet, petId) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction((tx)=> {
       tx.executeSql(
-        'INSERT INTO favorites (pet) VALUES (?);',
-        [JSON.stringify(pet)],
+        'INSERT INTO favorites (id, pet) VALUES (?, ?);',
+        [petId, JSON.stringify(pet)],
         (_,result) => resolve(result),
         (_,err) => reject(err)
       );
@@ -42,5 +42,19 @@ export const getFavPets = () => {
     });
   });
   return promise 
+}
+
+export const deleteFavPet = (petId) => {
+  const promise = new Promise ((resolve,reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `DELETE FROM favorites WHERE id=?`,
+        [petId],
+        (_,result) => resolve(result),
+        (_,err) => reject(err)
+      );
+    });
+  });
+  return promise
 }
 

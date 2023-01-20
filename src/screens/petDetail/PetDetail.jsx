@@ -9,7 +9,7 @@ import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 import { deletePet } from '../../store/pet.slice';
 import { deleteImage } from '../../utils';
-import { loadFavorites, saveFavorite } from '../../store/favorites.slice';
+import { deleteFavorite, loadFavorites, saveFavorite } from '../../store/favorites.slice';
 
 const PetDetail = ({navigation}) => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const PetDetail = ({navigation}) => {
   const [loading, setLoading] = useState(false)
   const [fav, setFav] = useState(false)
 
-  const { image: images, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet
+  const { image: images, name, description, categoryId, breed, gender, hair, eyes, chip, collar, date, lossZone, contact, status } = pet || {}
 
   const color = status === "lost" ? COLORS.danger : status === "found" ? COLORS.success : COLORS.light 
   let statusText = "En adopción"
@@ -67,16 +67,19 @@ const PetDetail = ({navigation}) => {
     }
   }
 
-  const onFav = async () => {
-    dispatch(saveFavorite(pet))
-    setFav(!fav)
+  const onFav = () => {
+    if (fav){
+      dispatch(deleteFavorite(pet.id, setFav))
+    } else {
+      dispatch(saveFavorite(pet, setFav))
+    }
   }
 
   const isFavPet = () => {
     let favPetsId = favPets.map(item => item?.id)
     return favPetsId.includes(pet.id)
   }
-
+  
   useEffect(() => {
     dispatch(loadFavorites(setLoading));
     setFav(isFavPet());

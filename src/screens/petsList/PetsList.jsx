@@ -9,6 +9,7 @@ import { selectCategory } from '../../store/category.slice';
 import { selectStatus } from "../../store/status.slice";
 import { filterPets, selectPet, getPets } from '../../store/pet.slice';
 import { COLORS } from '../../constants/colors';
+import { loadFavorites } from '../../store/favorites.slice';
 
 const PetsList = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const PetsList = ({ navigation }) => {
 
   useEffect(() => { 
     dispatch(getPets(setLoading)) 
+    dispatch(loadFavorites(setLoading))
     if (categorySelected || statusSelected){
       dispatch(filterPets({categoryId:categorySelected?.id, statusId:statusSelected?.id}))
     }

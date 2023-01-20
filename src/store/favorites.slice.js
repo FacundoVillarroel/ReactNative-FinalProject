@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFavPets, insertFavPet } from "../db";
+import { deleteFavPet, getFavPets, insertFavPet } from "../db";
 
 const initialState = {
   favoritesList:[],
@@ -19,12 +19,17 @@ const favoritesSlice = createSlice({
       state.favoritesList = list;
     },
     addFavorite: (state,action) => {
-      state.favoritesList.push(action.payload.pet)
+      const newList = [...state.favoritesList, action.payload];
+      state.favoritesList = newList;
     },
+    removeFavorite: (state, action) => {
+      const newList = state.favoritesList.filter(pet => pet.id !== action.payload.petId)
+      state.favoritesList = newList
+    }
   }
 })
 
-export const {updateFavorites, addFavorite} = favoritesSlice.actions;
+export const {updateFavorites, addFavorite, removeFavorite} = favoritesSlice.actions;
 
 export const loadFavorites = (setLoading) => {
   return async (dispatch) => {
@@ -39,11 +44,30 @@ export const loadFavorites = (setLoading) => {
   }
 }
 
-export const saveFavorite = (pet) => {
+export const saveFavorite = (pet, setFav) => {
   return async (dispatch) => {
-    const result = await insertFavPet(pet)
-    if (result.insertId){
-      dispatch(addFavorite(pet))
+    try {
+      const result = await insertFavPet(pet, pet.id)
+      if (result.insertId){
+        setFav(true);
+        dispatch(addFavorite(pet));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const deleteFavorite = (petId, setFav) => {
+  return async (dispatch) => {
+    try {
+      const result = await deleteFavPet(petId)
+      if (result.rowsAffected){
+        setFav(false)
+        dispatch(removeFavorite({petId}))
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 }

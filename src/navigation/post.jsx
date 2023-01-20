@@ -35,7 +35,10 @@ const PostNavigator = () => {
         component={Maps}
         options={{
           headerShown:true,
-          statusBarColor:COLORS.primary
+          statusBarColor:COLORS.primary,
+          headerStyle:{
+            backgroundColor: COLORS.primary,
+          },
         }}
       />
     </Stack.Navigator>
