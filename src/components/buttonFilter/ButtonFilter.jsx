@@ -70,7 +70,7 @@ const ButtonFilter = ({ onSelectCategory, onSelectStatus}) => {
           </View>
           
           <TouchableOpacity style={styles.modalButton} onPress={onFilter}>
-            <Text style={styles.modalText}>Aplicar</Text>
+            <Text style={styles.modalText}>Cerrar</Text>
           </TouchableOpacity>
         </View>
       </Modal>

@@ -21,13 +21,20 @@ export const styles = StyleSheet.create({
     justifyContent:"center",
     marginVertical:20,
   },
+  circleSelected:{
+    width:15,
+    height:15,
+    backgroundColor:COLORS.details,
+    borderRadius:50,
+    marginHorizontal:5,
+    opacity:.8,
+  },
   circle:{
     width:13,
     height:13,
     backgroundColor:"grey",
     borderRadius:50,
     marginHorizontal:5,
-    borderWidth:.5,
-    borderColor:COLORS.secondary,
+    opacity:.8,
   },
 })

@@ -55,7 +55,8 @@ export const styles = StyleSheet.create({
     bottom:20
   },
   modalText:{
-    fontFamily:"MartinMono-Regular"
+    fontFamily:"MartinMono-Regular",
+    color:COLORS.white
   },
   categoryContainer:{
     flexWrap:"wrap",

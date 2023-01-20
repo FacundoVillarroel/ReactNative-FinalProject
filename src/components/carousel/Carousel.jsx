@@ -45,7 +45,7 @@ const Carousel = ({images}) => {
         {images.map(({},index) => (
           <TouchableOpacity 
             key={index.toString()} 
-            style={[styles.circle, {backgroundColor: index === currentIndex ? "black" : "grey"}]}
+            style={index === currentIndex ? styles.circleSelected : styles.circle}
             onPress={() => scrollToIndex(index)}
           >
 
