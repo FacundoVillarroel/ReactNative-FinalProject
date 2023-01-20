@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons'; 
 
-import { PetDetailItem, ButtonClose, MapPreview, Modal, Carousel } from '../../components';
+import { PetDetailItem, RoundButton, MapPreview, Modal, Carousel } from '../../components';
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 import { deletePet } from '../../store/pet.slice';
@@ -96,10 +96,10 @@ const PetDetail = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
-        <ButtonClose onPress={onClose}/>
+        <RoundButton onPress={onClose}/>
         {pet.authorId === user?.userId 
-          ? <ButtonClose onPress={() => setModalVisible(!modalVisible)} style={styles.btnRight} type={"delete"}/> 
-          : <ButtonClose onPress={onFav} style={styles.btnRight} type={"fav"} fav={fav}/>}
+          ? <RoundButton onPress={() => setModalVisible(!modalVisible)} style={styles.btnRight} type={"delete"}/> 
+          : <RoundButton onPress={onFav} style={styles.btnRight} type={"fav"} fav={fav}/>}
           <Modal 
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}

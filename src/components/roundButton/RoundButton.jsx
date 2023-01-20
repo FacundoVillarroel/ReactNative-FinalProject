@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { styles } from './styles';
 import { COLORS } from '../../constants/colors';
 
-const ButtonClose = ({onPress, style, type, fav}) => {
+const RoundButton = ({onPress, style, type, fav}) => {
   return (
     <TouchableOpacity style={{...styles.container, ...style}} onPress={onPress}>
       {type === "delete"
@@ -18,4 +18,4 @@ const ButtonClose = ({onPress, style, type, fav}) => {
   )
 }
 
-export default ButtonClose
+export default RoundButton

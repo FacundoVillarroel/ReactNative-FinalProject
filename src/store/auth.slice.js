@@ -6,7 +6,7 @@ const userIdExample = "xnkvmARAFxffFgzg1NxuC0fU5VI3" // insert in initial state 
 
 const initialState = {
   token:null,
-  userId:null,
+  userId:userIdExample,
   email:null,
   error:null
 }
