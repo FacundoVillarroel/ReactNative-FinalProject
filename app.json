@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ReactNative-FinalProject",
-    "slug": "ReactNative-FinalProject",
+    "name": "Mipet-App",
+    "slug": "Mipet-App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,11 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.facuvillarroel.MipetApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0824565b-06d3-41cf-9939-4f663597b856"
+      }
     }
   }
 }
-
