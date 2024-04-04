@@ -1,12 +1,4 @@
-import {
-  API_KEY_STORAGE,
-  AUTH_DOMAIN_STORAGE,
-  DATA_BASE_URL,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID,
-} from "@env";
+import { API_KEY_STORAGE, AUTH_DOMAIN_STORAGE, DATA_BASE_URL, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID } from "@env"
 
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
@@ -19,11 +11,11 @@ const firebaseConfig = {
   projectId: PROJECT_ID,
   storageBucket: STORAGE_BUCKET,
   messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID,
+  appId: APP_ID
 };
 
-if (!firebase.apps.length) {
+if (!firebase.apps.length){
   firebase.initializeApp(firebaseConfig);
 }
 
-export { firebase };
+export { firebase }
