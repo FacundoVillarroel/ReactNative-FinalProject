@@ -25,7 +25,17 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.facuvillarroel.MipetApp"
+      "package": "com.facuvillarroel.MipetApp",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBQYigaX5jmteShA88gF2lQ9Kw6FsDyRc8"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -1,4 +1,4 @@
-import {URL_BASE} from "@env";
+const URL_BASE = "https://reactnative-finalproyect-default-rtdb.firebaseio.com"
 import { createSlice } from "@reduxjs/toolkit";
 
 import User from "../models/User";

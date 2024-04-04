@@ -1,4 +1,4 @@
-import { API_KEY_MAPS }  from "@env";
+const API_KEY_MAPS = "AIzaSyBQYigaX5jmteShA88gF2lQ9Kw6FsDyRc8"
 
 export const URL_MAPS = (
   lat,
